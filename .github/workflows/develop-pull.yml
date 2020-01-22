@@ -1,0 +1,28 @@
+name: Develop PR CI
+
+on: 
+  pull_request:
+    branches: 
+      - 'develop'
+
+jobs:
+  test:
+    name: Test - Build
+    #no tests so far
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup - .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.100
+      - name: Setup - Restore Cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+      - name: Build - Dotnet Build Release
+        run: dotnet build --configuration Release

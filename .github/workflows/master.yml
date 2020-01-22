@@ -1,0 +1,41 @@
+name: Master CI
+
+on: 
+  push:
+    branches: 
+      - 'master'
+
+# Don't use a cache here: 
+#  This is the last instance that can detect missing dependecies
+
+jobs:
+  build_release:
+    name: Build & Release
+    #no integration tests so far
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup - .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.100
+      - name: Setup - Restore Cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+      - name: Build - Dotnet Build Release
+        run: dotnet build --configuration Release
+      - name: Release - Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_draft.outputs.upload_url }} 
+          asset_path: ./target/javgent-standalone.jar
+          asset_name: javgent-standalone.jar
+          asset_content_type: application/java-archive
