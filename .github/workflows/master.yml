@@ -13,7 +13,6 @@ jobs:
     name: Build & Release
     #no integration tests so far
     runs-on: ubuntu-latest
-    
 
     steps:
       - uses: actions/checkout@v1
@@ -21,13 +20,6 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 3.1.100
-      - name: Setup - Restore Cache
-        uses: actions/cache@v1
-        with:
-          path: ~/.nuget/packages
-          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-nuget-
       
       - name: Build - Dotnet Build Release
         run: dotnet build --configuration Release
@@ -40,6 +32,7 @@ jobs:
           
         #Pack variants
         #TODO: a) should work parallel b) less redundant code
+        #Variant: Win64
       - name: Publish win-x64 - Dotnet Publish Release
         working-directory: Aves
         run: dotnet publish -c Release -r win-x64 /p:PublishSingleFile=true
@@ -58,7 +51,7 @@ jobs:
           asset_name: Aves-win-x64.zip
           asset_content_type: application/zip
           
-        
+        #Variant: Linux64
       - name: Publish linux-x64 - Dotnet Publish Release
         working-directory: Aves
         run: dotnet publish -c Release -r linux-x64 /p:PublishSingleFile=true
@@ -77,7 +70,7 @@ jobs:
           asset_name: Aves-linux-x64.zip
           asset_content_type: application/zip
         
-        
+        #Variant: Mac64
       - name: Publish osx-x64 - Dotnet Publish Release
         working-directory: Aves
         run: dotnet publish -c Release -r osx-x64 /p:PublishSingleFile=true
