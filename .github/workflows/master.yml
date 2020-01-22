@@ -1,0 +1,97 @@
+name: Master CI
+
+on: 
+  push:
+    branches: 
+      - 'master'
+
+# Don't use a cache here: 
+#  This is the last instance that can detect missing dependecies
+
+jobs:
+  build_release:
+    name: Build & Release
+    #no integration tests so far
+    runs-on: ubuntu-latest
+    
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup - .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.100
+      - name: Setup - Restore Cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+      
+      - name: Build - Dotnet Build Release
+        run: dotnet build --configuration Release
+        
+      - name: Release - Create Draft for Release
+        id: create_draft
+        uses: release-drafter/release-drafter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+        #Pack variants
+        #TODO: a) should work parallel b) less redundant code
+      - name: Publish win-x64 - Dotnet Publish Release
+        working-directory: Aves
+        run: dotnet publish -c Release -r win-x64 /p:PublishSingleFile=true
+        
+      - name: Pack win-x64 - Zip
+        working-directory: Aves/bin/Release/netcoreapp3.1/win-x64/publish/
+        run: zip --junk-paths Aves.zip Aves.exe
+        
+      - name: Release win-x64 - Upload Release Asset
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_draft.outputs.upload_url }} 
+          asset_path: ./Aves/bin/Release/netcoreapp3.1/win-x64/publish/Aves.zip
+          asset_name: Aves-win-x64.zip
+          asset_content_type: application/zip
+          
+        
+      - name: Publish linux-x64 - Dotnet Publish Release
+        working-directory: Aves
+        run: dotnet publish -c Release -r linux-x64 /p:PublishSingleFile=true
+        
+      - name: Pack linux-x64 - Zip
+        working-directory: Aves/bin/Release/netcoreapp3.1/linux-x64/publish/
+        run: zip --junk-paths Aves.zip Aves
+        
+      - name: Release linux-x64 - Upload Release Asset
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_draft.outputs.upload_url }} 
+          asset_path: ./Aves/bin/Release/netcoreapp3.1/linux-x64/publish/Aves.zip
+          asset_name: Aves-linux-x64.zip
+          asset_content_type: application/zip
+        
+        
+      - name: Publish osx-x64 - Dotnet Publish Release
+        working-directory: Aves
+        run: dotnet publish -c Release -r osx-x64 /p:PublishSingleFile=true
+        
+      - name: Pack osx-x64 - Zip
+        working-directory: Aves/bin/Release/netcoreapp3.1/osx-x64/publish/
+        run: zip --junk-paths Aves.zip Aves
+        
+      - name: Release osx-x64 - Upload Release Asset
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_draft.outputs.upload_url }} 
+          asset_path: ./Aves/bin/Release/netcoreapp3.1/osx-x64/publish/Aves.zip
+          asset_name: Aves-osx-x64.zip
+          asset_content_type: application/zip

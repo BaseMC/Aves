@@ -1,0 +1,6 @@
+branches:
+  - master
+template: |
+  ## Changes
+  
+  $CHANGES

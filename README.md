@@ -1,3 +1,5 @@
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/BaseMC/Aves/.NET%20Core)](https://github.com/BaseMC/Aves/actions)
+
 # Aves
 A Minecraft deobfusctor / code generator
 
