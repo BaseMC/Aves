@@ -1,4 +1,6 @@
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/BaseMC/Aves/.NET%20Core)](https://github.com/BaseMC/Aves/actions)
+[![Build](https://img.shields.io/github/workflow/status/BaseMC/Aves/Master%20CI)](https://github.com/BaseMC/Aves/actions)
+[![Latest Version](https://img.shields.io/github/v/release/BaseMC/Aves)](https://github.com/BaseMC/Aves/releases)
+[![Build Develop](https://img.shields.io/github/workflow/status/BaseMC/Aves/Develop%20CI?label=build%20develop)](https://github.com/BaseMC/Aves/actions)
 
 # Aves
 A Minecraft deobfusctor / code generator
