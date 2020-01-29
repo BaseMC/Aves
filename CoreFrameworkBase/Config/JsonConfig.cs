@@ -47,7 +47,7 @@ namespace CoreFrameworkBase.Config
          else
          {
             if (fileNotFoundAction == LoadFileNotFoundAction.THROW_EX)
-               throw new FileNotFoundException($"Could not find file at '{Config.SavePath}'");
+               throw new FileNotFoundException($"Could not find file '{Config.SavePath}'");
             else if (fileNotFoundAction == LoadFileNotFoundAction.GENERATE_FILE)
                Save();
          }
