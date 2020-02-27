@@ -13,18 +13,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="avesflower.jar" />
-    <None Remove="javgent-standalone.jar" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="avesflower.jar" />
-    <EmbeddedResource Include="javgent-standalone.jar" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.7.82" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Octokit" Version="0.42.0" />
   </ItemGroup>
 
   <ItemGroup>

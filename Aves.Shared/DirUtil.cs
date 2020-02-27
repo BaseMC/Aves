@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using System.Threading;
 
-namespace Aves.Util
+namespace Aves.Shared
 {
    public class DirUtil
    {

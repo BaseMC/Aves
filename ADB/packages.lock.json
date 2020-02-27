@@ -14,6 +14,12 @@
         "resolved": "12.0.3",
         "contentHash": "6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg=="
       },
+      "Octokit": {
+        "type": "Direct",
+        "requested": "[0.42.0, )",
+        "resolved": "0.42.0",
+        "contentHash": "X5EOZNjhKKyS5rXE9nmcLJHzkz1RAxSghfTcgU95sV1aX9M5PoaJU5JRU3I35xpP0bcu5bfTbEghBBoRn1y5eg=="
+      },
       "Microsoft.NETCore.Platforms": {
         "type": "Transitive",
         "resolved": "1.1.0",
@@ -269,7 +275,7 @@
       "aves.shared": {
         "type": "Project",
         "dependencies": {
-          "CoreFrameworkBase": "1.0.7362.34319"
+          "CoreFrameworkBase": "1.0.7362.36650"
         }
       },
       "coreframeworkbase": {

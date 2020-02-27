@@ -1,0 +1,12 @@
+avesflower.version=XX
+
+javgent.version=XX
+
+java.feature_version=11
+java.release_type=ga
+java.image_type=jre
+java.jvm_imp=hotspot
+java.project=jdk
+java.sort_order=DESC
+java.vendor=adoptopenjdk
+java.page_size=1

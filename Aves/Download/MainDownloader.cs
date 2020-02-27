@@ -11,13 +11,14 @@ using System.Diagnostics;
 using System.Linq;
 using System.Diagnostics.Contracts;
 using Aves.Util;
+using Aves.Shared;
 
 namespace Aves.Download
 {
    /// <summary>
    /// Downloads the main parts, mainly the jar, optional also the libarys and the logging configuration
    /// </summary>
-   public class MainDownloader : Downloader
+   public class MainDownloader : DownloadTask
    {
       public MainDownloader(Configuration config) : base(config)
       {
@@ -83,7 +84,7 @@ namespace Aves.Download
          if (versionDownloadUrl == null)
             throw new InvalidOperationException($"No version[='{Config.Version}'] found in Mainfest/LauncherMeta");
 
-         Download(versionDownloadUrl, Config.VersionSrcJson);
+         Downloader.Download(versionDownloadUrl, Config.VersionSrcJson);
       }
 
       private void ProcessVersion()
