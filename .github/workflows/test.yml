@@ -1,0 +1,44 @@
+name: Test CI
+
+on: 
+  push:
+    branches: 
+      - 'download-files-automatically'
+
+# Don't use a cache here: 
+#  This is the last instance that can detect missing dependecies
+
+jobs:
+  build_release:
+    name: Build & Release
+    #no integration tests so far
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup - .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.101
+      
+      - name: Build - Dotnet Build Release
+        run: dotnet build --configuration Release
+                  
+        #Pack variants
+        #TODO: a) should work parallel b) less redundant code
+        #Variant: Win64
+      - name: Publish win-x64 - Dotnet Publish Release
+        working-directory: Aves
+        run: dotnet publish -c Release -r win-x64 /p:PublishSingleFile=true
+        
+      - name: Pack win-x64 - Zip
+        working-directory: Aves/bin/Release/netcoreapp3.1/win-x64/publish/
+        run: zip --junk-paths Aves.zip Aves.exe
+        
+      - name: Tree Build Dir
+        working-directory: Aves/bin/Release/netcoreapp3.1/win-x64/publish/
+        run: tree
+        
+      - name: Tree
+        run: tree
+          
