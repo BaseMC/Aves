@@ -60,6 +60,10 @@ jobs:
         working-directory: Aves/bin/Release/netcoreapp3.1/win-x64/publish/
         run: zip -r Aves.zip . -x \*.pdb
         
+      - name: DEBUG
+        working-directory: Aves/bin/Release/netcoreapp3.1/win-x64/publish/
+        run: ls -lh
+        
       - name: Release win-x64 - Upload Release Asset
         uses: actions/upload-release-asset@v1.0.1
         env:
