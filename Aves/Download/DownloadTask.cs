@@ -12,6 +12,7 @@ using System.Linq;
 using System.Diagnostics.Contracts;
 using Aves.Util;
 using Aves.Shared;
+using Aves.Shared.Download;
 
 namespace Aves.Download
 {
@@ -55,7 +56,7 @@ namespace Aves.Download
 
       protected Task ReadFromJsonAndDownload(JToken downloadInfo, string targetPath)
       {
-         return Downloader.DownloadAsync(
+         return CheckSumDownloader.SHA1.DownloadAsync(
             downloadInfo["url"].ToObject<string>(),
             targetPath,
             downloadInfo["size"].ToObject<long>(),

@@ -32,20 +32,13 @@ namespace Aves.MakeRead.Provider
 
       private void RunDecompile(Configuration config, VariantConfig variant)
       {
-         if (config.Decompiler == null)
-         {
-            var res = new EmbeddedResExtracter($"{nameof(Aves)}.{Configuration.EMBEDDED_Decompiler}", Configuration.EMBEDDED_Decompiler);
-            if (!res.ExternalValid())
-               res.ExtractResource();
-         }
-
          Log.Info($"Decompiler starting for '{variant.Name}'");
 
          var parent = Directory.GetParent(variant.DecompiledFile).ToString();
          DirUtil.EnsureCreatedAndClean(parent);
 
          var command = string.Format(config.BaseDecompileCommand,
-            config.Decompiler ?? Configuration.EMBEDDED_Decompiler,
+            config.Decompiler,
             variant.DeObfuscatedFile,
             parent);
 

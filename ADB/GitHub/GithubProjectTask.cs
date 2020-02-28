@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Linq;
+using Aves.Shared.Download;
 
 namespace ADB.GitHub
 {
@@ -33,10 +34,12 @@ namespace ADB.GitHub
          // "most recent non-prerelease, non-draft"
          var release = Client.Repository.Release.GetLatest(GithubProjectConfig.Owner, GithubProjectConfig.Repo).Result;
 
+         //https://developer.github.com/v3/repos/releases/
+
          TaskRunner.RunTasks(
            release.Assets
               .Select(asset =>
-                  Downloader.RunDownloadAsync(
+                  BasicDownloader.Default.RunDownloadAsync(
                      asset.BrowserDownloadUrl,
                      Path.Combine(Configuration.DestinationDir, asset.Name),
                      asset.Size)

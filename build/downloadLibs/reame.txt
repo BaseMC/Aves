@@ -1,7 +1,0 @@
-Run ./build.sh
-
-== WINDOWS ==
-Run with git-bash: https://git-scm.com/download/win
-
-== LINUX == 
-You may need to do "chmod +x build.sh" to run the skript

@@ -35,10 +35,16 @@ namespace Aves
          if (string.IsNullOrWhiteSpace(Config.BaseDeobfuscatorCommand))
             throw new ArgumentException($"{nameof(Config.BaseDeobfuscatorCommand)}[='{Config.BaseDeobfuscatorCommand}'] is invalid");
 
+         if (string.IsNullOrWhiteSpace(Config.Deobfuscator))
+            throw new ArgumentException($"{nameof(Config.Deobfuscator)}[='{Config.Deobfuscator}'] is invalid");
+
          if (string.IsNullOrWhiteSpace(Config.BaseDecompileCommand))
             throw new ArgumentException($"{nameof(Config.BaseDecompileCommand)}[='{Config.BaseDecompileCommand}'] is invalid");
 
-         
+         if (string.IsNullOrWhiteSpace(Config.Decompiler))
+            throw new ArgumentException($"{nameof(Config.Decompiler)}[='{Config.Decompiler}'] is invalid");
+
+
          if (Config.WorkingDirectory == null)
             throw new ArgumentException($"{nameof(Config.WorkingDirectory)} is not set");
 
@@ -140,10 +146,6 @@ namespace Aves
 
             DirUtil.EnsureCreated(variant.OutputFilesDirFolder);
          }
-
-         Log.Info($"Set {nameof(Config.Deobfuscator)}={(Config.Deobfuscator == null ? $"DEFAULT ({Configuration.EMBEDDED_Deobfuscator})" : $"'{Config.Deobfuscator}'")}");
-
-         Log.Info($"Set {nameof(Config.Decompiler)}={(Config.Decompiler == null ? $"DEFAULT ({Configuration.EMBEDDED_Decompiler})" : $"'{Config.Decompiler}'")}");
 
          if (Config.NetworkIncludeClientLibs || Config.NetworkIncludeLogging)
          {

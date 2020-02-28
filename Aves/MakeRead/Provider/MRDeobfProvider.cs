@@ -32,19 +32,12 @@ namespace Aves.MakeRead.Provider
 
       private void RunDeobfuscation(Configuration config, VariantConfig variant)
       {
-         if (config.Deobfuscator == null)
-         {
-            var res = new EmbeddedResExtracter($"{nameof(Aves)}.{Configuration.EMBEDDED_Deobfuscator}", Configuration.EMBEDDED_Deobfuscator);
-            if(!res.ExternalValid())
-               res.ExtractResource();
-         }
-
          Log.Info($"Deobfusctor starting for '{variant.Name}'");
 
          DirUtil.EnsureCreatedAndClean(Directory.GetParent(variant.DeObfuscatedFile).ToString());
 
          var command = string.Format($"{config.BaseDeobfuscatorCommand}{(variant.ExcludedComponents.Count > 0 ? $" -ec {string.Join(",",variant.ExcludedComponents)}" : "")}",
-            config.Deobfuscator ?? Configuration.EMBEDDED_Deobfuscator,
+            config.Deobfuscator,
             variant.SrcJar,
             variant.PatchFile,
             variant.DeObfuscatedFile);

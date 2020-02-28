@@ -7,40 +7,47 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aves.Shared
+namespace Aves.Shared.Download
 {
-   public static class Downloader
+   public class CheckSumDownloader
    {
-      public static Task DownloadAsync(string srcURL, string targetPath, long size, bool trykeepExisting, string sha1 = null, int retrys = 3)
+      private Func<HashAlgorithm> HashAlgorithmSupplier { get; set; }
+
+      public CheckSumDownloader(Func<HashAlgorithm> hashAlgorithmSupplier)
+      {
+         HashAlgorithmSupplier = hashAlgorithmSupplier;
+      }
+
+      public Task DownloadAsync(string srcURL, string targetPath, long size, bool trykeepExisting, string checksum = null, int retrys = 3)
       {
          if (trykeepExisting && File.Exists(targetPath))
          {
             Log.Debug($"Trying to keep existing file[='{targetPath}']");
 
-            if (!CheckFile(targetPath, size, sha1))
+            if (!CheckFile(targetPath, size, checksum))
             {
                Log.Info($"Existing file[='{targetPath}'] is faulty! Downloading new one...");
-               return RunDownloadAsync(srcURL, targetPath, size, sha1, retrys);
+               return RunDownloadAsync(srcURL, targetPath, size, checksum, retrys);
             }
 
             Log.Info($"File[='{targetPath}']'s hash and size are ok! No Download required!");
             return Task.FromResult(0);
          }
 
-         return RunDownloadAsync(srcURL, targetPath, size, sha1, retrys);
+         return RunDownloadAsync(srcURL, targetPath, size, checksum, retrys);
 
       }
 
-      public static Task RunDownloadAsync(string srcURL, string targetPath, long size, string sha1 = null, int retrys = 3)
+      public Task RunDownloadAsync(string srcURL, string targetPath, long size, string checksum = null, int retrys = 3)
       {
          return Task.Run(() =>
          {
             bool isok = true;
             do
             {
-               Download(srcURL, targetPath);
+               Downloader.Download(srcURL, targetPath);
 
-               isok = CheckFile(targetPath, size, sha1);
+               isok = CheckFile(targetPath, size, checksum);
                retrys--;
 
                if (!isok)
@@ -53,21 +60,7 @@ namespace Aves.Shared
          });
       }
 
-      public static void Download(string srcURL, string targetPath)
-      {
-         Log.Info($"Starting download: '{srcURL}'->'{targetPath}'");
-
-         var sw = Stopwatch.StartNew();
-
-         //Webclient overrides existing files
-         using (var webclient = new WebClient())
-            webclient.DownloadFile(srcURL, targetPath);
-
-         sw.Stop();
-         Log.Debug($"Downloading from '{srcURL}' took {sw.ElapsedMilliseconds}ms");
-      }
-
-      public static bool CheckFile(string targetPath, long size, string sha1 = null)
+      public bool CheckFile(string targetPath, long size, string checksum = null)
       {
          var exists = File.Exists(targetPath);
          Log.Debug($"'{targetPath}' EXISTS={exists}");
@@ -81,23 +74,28 @@ namespace Aves.Shared
          if (fileInfo.Length != size)
             return false;
 
-         if (sha1 != null)
+         if (checksum != null)
          {
             string hash = null;
             using (var fileStream = File.OpenRead(targetPath))
-            using (var cryptoProvider = new SHA1CryptoServiceProvider())
+            using (var cryptoProvider = HashAlgorithmSupplier.Invoke())
             {
                hash = BitConverter
                        .ToString(cryptoProvider.ComputeHash(fileStream)).Replace("-", "").ToLower();
             }
 
-            Log.Debug($"'{targetPath}' SHA1[EXP='{sha1}';ACT='{hash}']");
+            Log.Debug($"'{targetPath}' SHA1[EXP='{checksum}';ACT='{hash}']");
 
-            if (hash != sha1)
+            if (hash != checksum)
                return false;
          }
 
          return true;
       }
+
+      public static CheckSumDownloader SHA1 => new CheckSumDownloader(() => new SHA1CryptoServiceProvider());
+
+      public static CheckSumDownloader SHA256 => new CheckSumDownloader(() => new SHA256CryptoServiceProvider());
+
    }
 }

@@ -6,12 +6,11 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using System.Security.Cryptography;
-using System.Diagnostics;
 using System.Linq;
 using System.Diagnostics.Contracts;
 using Aves.Util;
 using Aves.Shared;
+using Aves.Shared.Download;
 
 namespace Aves.Download
 {
