@@ -1,9 +1,9 @@
-name: Master CI
+name: Test CI
 
 on: 
   push:
     branches: 
-      - 'master'
+      - 'download-files-automatically'
 
 # Don't use a cache here: 
 #  This is the last instance that can detect missing dependecies
