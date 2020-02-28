@@ -19,10 +19,23 @@ jobs:
       - name: Setup - .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 3.1.101
+          dotnet-version: 3.1.102
       
       - name: Build - Dotnet Build Release
         run: dotnet build --configuration Release
+        
+        #Build and prepare build tool
+      - name: Publish build tool - ADB
+        working-directory: ADB
+        run: dotnet publish -c Release
+                      
+      - name: Move build tool to build folder - ADB
+        working-directory: build
+        run: cp ADB/bin/Release/netcoreapp3.1/publish/* .
+      
+      - name: Self test build tool - ADB
+        working-directory: build
+        run: ./ADB --version
                   
         #Pack variants
         #TODO: a) should work parallel b) less redundant code
@@ -30,15 +43,16 @@ jobs:
       - name: Publish win-x64 - Dotnet Publish Release
         working-directory: Aves
         run: dotnet publish -c Release -r win-x64 /p:PublishSingleFile=true
+                
+      - name: Download dependencies of win-x64 - ADB
+        working-directory: build
+        run: ./ADB -c config.json --rid win-x64 --bc Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
+        #Ignore pdb files
       - name: Pack win-x64 - Zip
         working-directory: Aves/bin/Release/netcoreapp3.1/win-x64/publish/
-        run: zip --junk-paths Aves.zip Aves.exe
+        run: zip -r Aves.zip . -x \*.pdb
         
-      - name: Tree Build Dir
-        working-directory: Aves/bin/Release/netcoreapp3.1/win-x64/publish/
-        run: tree
-        
-      - name: Tree
-        run: tree
           
