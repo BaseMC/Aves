@@ -14,6 +14,9 @@ namespace ADB.CMD
       [Option('l', "logfile", Default = false, HelpText = "Logs into ./logs")]
       public bool LogToFile { get; set; } = false;
 
+      [Option("version", Default = false, HelpText = "Shows the current version and does nothing else")]
+      public bool ShowVersion { get; set; } = false;
+
       #region JSON based Config
       [Option('c', "config", HelpText = "path to the configuration file; if not set: using default internal config")]
       public string ConfigPath { get; set; } = null;

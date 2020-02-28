@@ -275,7 +275,7 @@
       "aves.shared": {
         "type": "Project",
         "dependencies": {
-          "CoreFrameworkBase": "1.0.7362.36650"
+          "CoreFrameworkBase": "1.0.7363.38651"
         }
       },
       "coreframeworkbase": {
