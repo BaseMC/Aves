@@ -1,6 +1,6 @@
 branches:
   - master
-  - download-files-automatically
+  - 'download-files-automatically'
 name-template: "v$NEXT_MINOR_VERSION"
 tag-template: "v$NEXT_MINOR_VERSION"
 template: |
