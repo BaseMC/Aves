@@ -30,8 +30,7 @@ jobs:
         run: dotnet publish -c Release
                       
       - name: Move build tool to build folder - ADB
-        working-directory: build
-        run: cp ADB/bin/Release/netcoreapp3.1/publish/* .
+        run: cp ADB/bin/Release/netcoreapp3.1/publish/* build
       
       - name: Self test build tool - ADB
         working-directory: build
