@@ -95,7 +95,7 @@ namespace ADB
 
          if (!string.IsNullOrWhiteSpace(CmdOption.GITHUB_TOKEN))
          {
-            Log.Info($"SetInp: {nameof(Config.GitHubConfig.GitHubToken)}='****'[SHA={HashUtil.GenerateSHA2(CmdOption.GITHUB_TOKEN)}]");
+            Log.Info($"SetInp: {nameof(Config.GitHubConfig.GitHubToken)}='****'[SHA={HashUtil.GenerateSHA2(Config.GitHubConfig.GitHubToken)}]");
             Config.GitHubConfig.GitHubToken = CmdOption.GITHUB_TOKEN;
          }
 
@@ -131,7 +131,7 @@ namespace ADB
          var envGithubToken = Environment.GetEnvironmentVariable("GITHUB_TOKEN");
          if (!string.IsNullOrWhiteSpace(envGithubToken))
          {
-            Log.Info($"SetInp: {nameof(Config.GitHubConfig.GitHubToken)}='****'[SHA={HashUtil.GenerateSHA2(CmdOption.GITHUB_TOKEN)}]");
+            Log.Info($"SetInp: {nameof(Config.GitHubConfig.GitHubToken)}='****'[SHA={HashUtil.GenerateSHA2(envGithubToken)}]");
             Config.GitHubConfig.GitHubToken = envGithubToken;
          }
       }
