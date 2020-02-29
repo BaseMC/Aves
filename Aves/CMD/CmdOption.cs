@@ -15,7 +15,7 @@ namespace Aves.CMD
       [Option('l', "logfile", Default = false, HelpText = "Logs into ./logs")]
       public bool LogToFile { get; set; } = false;
 
-      [Option("version", Default = false, HelpText = "Shows the current version and does nothing else")]
+      [Option("version", Default = false, HelpText = "Shows the current " + nameof(Aves) + " version and does nothing else")]
       public bool ShowVersion { get; set; } = false;
 
       #region JSON based Config
@@ -27,7 +27,7 @@ namespace Aves.CMD
       #endregion JSON based Config
 
       #region SetableProperties
-      [Option('v', "version", HelpText = "version that should be used; e.g. 1.15")]
+      [Option('v', "mcversion", HelpText = "version that should be used; e.g. 1.15")]
       public string Version { get; set; } = null;
 
       [Option('j', "java", HelpText = "path to java.exe (requires Java 11+)")]
