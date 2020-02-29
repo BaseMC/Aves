@@ -21,10 +21,7 @@ The project trys to work as automated as possible.<br/>
 So if mojang doesn't do any (breaking) changes, it should work a long time.
 
 ## Requirements
-* Java 11+ <br/>Download it via 
-  * [AdoptOpenJDK](https://adoptopenjdk.net/?variant=openjdk11&jvmVariant=hotspot) (just follow the instructions)
-  * [OpenJDK](https://jdk.java.net/) (has to be manually installed; requires some experience) 
-* Also recommended: 1.5-2GB of RAM for the [decompiler](https://github.com/BaseMC/avesflower)
+* Recommended: 1.5-2GB of RAM for the [decompiler](https://github.com/BaseMC/avesflower)
 * You can only use the generated code under mojang's license: <br/> ``(c) 2019 Microsoft Corporation.  All rights reserved.  This information is provided "as-is" and you bear the risk of using it. This information does not provide you with any legal rights to any intellectual property in any Microsoft product. You may copy and use this information for your internal, reference purposes. Microsoft makes no warranties, express or implied, with respect to the information provided here.``
 
 ## Download
@@ -35,13 +32,14 @@ So if mojang doesn't do any (breaking) changes, it should work a long time.
 
 ### Example
 * Basic example for commandline/shell:<br/>
-```Aves.exe -v 1.14.4 -j "C:\Program Files\Java\openjdk-11.0.2\bin\java.exe"```<br/>
+```Aves.exe -v 1.14.4```<br/>
 Description: Creates source code for 1.14.4 (by default: client only)
 #### Folder structure
 
     .
     ├─── javgent-standalone.jar          # Deobfuscator → see https://github.com/BaseMC/javgent
     ├─── avesflower.jar                  # Decompiler → see https://github.com/BaseMC/avesflower
+    ├─── jre                             # Embedded Java Runtime Environment → see https://adoptopenjdk.net/
     ├─── logs                            # Generated log files (if enabled)
     └─┬─ workingDir                      # Main Working Directory
       ├─── version_manifest.json         # Version Manifest (Lookup for all versions)
@@ -75,10 +73,11 @@ For more detailed description take a look at the documentation of the [correspon
 |Argument|Meaning|Example|
 |--------|-------|-------|
 |``-l`` ``--logfile``|logs additionally to a logfile<br/> generated under ``/logs`` |``-l``|
+|``--version``| Shows the current Aves version and does nothing else |``-version``<br/>Example ``Aves 1.0.7364.40087``<br/> Format:  ``<Name> <MainVersion>.<SubVersion>.<DaysSince2000>.<SecondsSinceMidnight/2>`` → [see also](https://stackoverflow.com/questions/356543/can-i-automatically-increment-the-file-build-version-when-using-visual-studio) |
 |``--genconf <value>``|only generates a json-Config file<br/> value = JSON-Config file to generate | ``--genconf config.json`` |
 |``-c <value>`` ``--conf <value>``|load a json-Config file<br/> value = JSON-Config file (see below) |``-c config.json`` (uses a file called config.json for configuration)|
-|``-v`` ``--version``|<b>Required</b> (if using no json file for configuration)<br /> Version that should be downloaded|``-v "1.14.4"`` (generates files for 1.14.4)|
-|``-j`` ``--java``|Path to ``java.exe`` (Java11+)<br/><i>experimental:</i><br/>If not set, will be automatically searched in either the Environment-Variable ``%JAVA_HOME%``(Windows) / ``$JAVA_HOME``(Linux/Mac) or over the command ``where java`` (Windows, Linux, Mac) | ``-j "C:\Program Files\Java\openjdk-11.0.2\bin\java.exe"`` |
+|``-v`` ``--mcversion``|Required (if using no json file for configuration)<br /> Version that should be downloaded|``-v "1.14.4"`` (generates files for 1.14.4)|
+|``-j`` ``--java``|Path to ``java.exe`` (Java11+)<br/><i>default:</i> path to included ``jre``<br/><i>experimental:</i><br/>If not set, will be automatically searched in either the Environment-Variable ``%JAVA_HOME%``(Windows) / ``$JAVA_HOME``(Linux/Mac) or over the command ``where java`` (Windows, Linux, Mac) | ``-j "C:\Program Files\Java\openjdk-11.0.2\bin\java.exe"`` |
 |``-p`` ``--profiles``|Given profiles/variants, that should be used<br/>Overrides the ``Enabled``-property in the json |``-p client server`` ``-p client``|
 
 see also :point_right: ``--help`` 
@@ -90,7 +89,7 @@ If you want to generate a config file, use ``--genconf <Path> <optional:addition
 It's also possible to combine it with some parameters from above, e.g. ``-j`` or ``-v``.
 
 auto-generated file:
-``--genconf config.json -j "C:\Program Files\Java\openjdk-11.0.2\bin\java.exe"``
+``--genconf config.json``
 ```JS
 {
   "ResolveOverNetwork": true,
@@ -141,7 +140,7 @@ auto-generated file:
     }
   ],
   "MakeJavaCompatible": true,
-  "JavaExePath": "C:\\Program Files\\Java\\openjdk-11.0.2\\bin\\java.exe",
+  "JavaExePath": "jre\\bin\\java.exe",
   "Deobfuscator": null,
   "DeobfuscatorTimeout": "00:05:00",
   "BaseDeobfuscatorCommand": "-jar \"{0}\" -s \"{1}\" -m \"{2}\" -o \"{3}\"",
@@ -184,7 +183,8 @@ Build the project yourself:
 * Create an executable with ``dotnet publish -r <TargetedRuntime(OS)Identifier> -p:PublishSingleFile=true``
   * for the targeted ``RuntimeIdentfier`` see https://docs.microsoft.com/de-de/dotnet/core/rid-catalog
   * example for windows: ``dotnet publish -r win10-x64 -p:PublishSingleFile=true``
-  
+* <b> TODO: Doc Run build tool ADB</b>
+
 ### Nested projects
 * [javgent](https://github.com/BaseMC/javgent)
 * [avesflower](https://github.com/BaseMC/avesflower)
