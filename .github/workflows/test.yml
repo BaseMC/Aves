@@ -52,6 +52,7 @@ jobs:
       - name: Download dependencies of win-x64 - ADB
         working-directory: build
         run: ./ADB -c config.json --rid win-x64 --bc Release
+        timeout-minutes: 10
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
