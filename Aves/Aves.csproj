@@ -18,11 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="avesflower.jar" />
-    <EmbeddedResource Include="javgent-standalone.jar" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.7.82" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
