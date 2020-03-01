@@ -7,7 +7,7 @@ namespace Aves.Shared
 {
    public static class PathBuilder
    {
-      public static string BuildPath(string name, string path, string relativeParent = null)
+      public static string BuildPath(string name, string path, string relativeParent)
       {
          if (path == null)
             throw new ArgumentException($"{name} is not set");

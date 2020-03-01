@@ -29,6 +29,7 @@ namespace Aves
 
       private void Init()
       {
+         //Check inputs
          if (string.IsNullOrWhiteSpace(Config.Version))
             throw new ArgumentException($"{nameof(Config.Version)}[='{Config.Version}'] is invalid");
 
@@ -44,9 +45,23 @@ namespace Aves
          if (string.IsNullOrWhiteSpace(Config.Decompiler))
             throw new ArgumentException($"{nameof(Config.Decompiler)}[='{Config.Decompiler}'] is invalid");
 
-
          if (Config.WorkingDirectory == null)
             throw new ArgumentException($"{nameof(Config.WorkingDirectory)} is not set");
+
+         // Ensure Dependency executables exist
+         Config.JavaExePath = TryFindJavaExe();
+         if (string.IsNullOrEmpty(Config.JavaExePath))
+            throw new ArgumentException($"JavaExePath[='{Config.JavaExePath}'] is invalid");
+
+         Log.Info($"Set {nameof(Config.JavaExePath)}='{Config.JavaExePath}'");
+         
+         Config.Deobfuscator = BuildPathForExecutableLocation(nameof(Config.Deobfuscator), Config.Deobfuscator);
+         Log.Info($"Set {nameof(Config.Deobfuscator)}='{Config.Deobfuscator}'");
+
+         Config.Decompiler = BuildPathForExecutableLocation(nameof(Config.Decompiler), Config.Decompiler);
+         Log.Info($"Set {nameof(Config.Decompiler)}='{Config.Decompiler}'");
+
+         //Ensure Directories and files
 
          DirUtil.EnsureCreated(Config.WorkingDirectory);
 
@@ -167,19 +182,13 @@ namespace Aves
             }
          }
 
-         Config.JavaExePath = TryFindJavaExe();
-         if(string.IsNullOrEmpty(Config.JavaExePath))
-            throw new ArgumentException($"JavaExePath[='{Config.JavaExePath}'] is invalid");
-
-         Log.Info($"Set {nameof(Config.JavaExePath)}='{Config.JavaExePath}'");
       }
 
       private string TryFindJavaExe()
       {
-         string javaExePath = Config.JavaExePath;
+         string javaExePath = BuildPathForExecutableLocation(nameof(Config.JavaExePath), Config.JavaExePath);
          if (!string.IsNullOrEmpty(javaExePath))
          {
-            BuildPath(nameof(Config.JavaExePath), Config.JavaExePath);
             if (File.Exists(javaExePath))
             {
                Log.Info("Found valid location of java in configuration");
@@ -225,9 +234,14 @@ namespace Aves
          return null;
       }
 
-      private string BuildPath(string name, string path, string relativeParent = null)
+      private string BuildPath(string name, string path, string relativeParent)
       {
          return PathBuilder.BuildPath(name, path, relativeParent);
+      }
+
+      private string BuildPathForExecutableLocation(string name, string path)
+      {
+         return PathBuilder.BuildPath(name, path, AppDomain.CurrentDomain.BaseDirectory);
       }
 
       #endregion Init
