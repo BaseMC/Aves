@@ -15,15 +15,15 @@ env:
 jobs:
   build_release:
     name: Base
-    runs-on: ${{ env.job-os-runner }}
+    runs-on: ${{ job-os-runner }}
 
     steps:
       - uses: actions/checkout@v1
         
-      - name: Setup .NET Core ${{ env.dotnet-version }}
+      - name: Setup .NET Core ${{ dotnet-version }}
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: ${{ env.dotnet-version }}
+          dotnet-version: ${{ dotnet-version }}
       
       - name: Build - Dotnet Build Release
         run: dotnet build --configuration Release
@@ -69,7 +69,7 @@ jobs:
 
   build_release_variants:
     name: Variants
-    runs-on:  ${{ env.job-os-runner }}
+    runs-on:  ${{ job-os-runner }}
     needs: [build_release]
     strategy:
       matrix:
@@ -88,10 +88,10 @@ jobs:
         id: create_draft
         run: echo "::set-output name=upload_url::$(cat asset_upload_url.txt)"
       
-      - name: Setup .NET Core ${{ env.dotnet-version }}
+      - name: Setup .NET Core ${{ dotnet-version }}
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: ${{ env.dotnet-version }}
+          dotnet-version: ${{ dotnet-version }}
               
       - name: Publish ${{ matrix.os }} ${{ matrix.configuration }} - Dotnet Publish 
         working-directory: Aves
