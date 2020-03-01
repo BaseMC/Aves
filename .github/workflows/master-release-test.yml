@@ -61,13 +61,6 @@ jobs:
         working-directory: Aves/bin/Release/netcoreapp3.1/win-x64/publish/
         run: zip -r Aves.zip . -x \*.pdb
         
-      - name: DEBUG OUTPUTFOLDER
-        working-directory: Aves/bin/Release/netcoreapp3.1/win-x64/publish/
-        run: ls -lh
-        
-      - name: DEBUG UploadUrl
-        run: echo ${{ steps.create_draft.outputs.upload_url }} 
-        
       - name: Release win-x64 - Upload Release Asset
         uses: actions/upload-release-asset@v1.0.1
         env:
