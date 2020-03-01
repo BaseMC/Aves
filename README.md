@@ -180,10 +180,10 @@ Build the project yourself:
 * Build ``ADB`` with Configuration ``Debug``
 * Copy [build-dev.json](build/build-dev.json) into your ``ADB`` build output folder (e.g. ``ADB/bin/Debug/netcoreapp3.1``)
 * Run in the ``ADB`` build output folder: ``ADB.exe -c build-dev.json -r <yourSystemRID>``
-** You can get the corresponding RID [here](https://docs.microsoft.com/en-us/dotnet/core/rid-catalog)<br/>Most common:
-*** ``win-x64`` Windows 64bit
-*** ``linux-x64`` Linux 64bit
-*** ``osx-x64`` Mac OS X 64bit
+  * You can get the corresponding RID [here](https://docs.microsoft.com/en-us/dotnet/core/rid-catalog)<br/>Most common:
+    * ``win-x64`` Windows 64bit
+    * ``linux-x64`` Linux 64bit
+    * ``osx-x64`` Mac OS X 64bit
 * Copy all files from the generated ``dev`` folder into your ``Aves`` build output folder
 
 ### Build an executable
