@@ -18,9 +18,7 @@ namespace ADB.Config
       public string DestinationDir { get; set; } = null;
 
       /// <summary>
-      /// REQUIRED in JSON-Config
-      /// <para/>
-      /// With this pattern the <see cref="DestinationDir"/> is built
+      /// With this pattern (if not null) the <see cref="DestinationDir"/> is built
       /// </summary>
       /// <remarks>
       /// / are replaced with <see cref="Path.DirectorySeparatorChar"/>
@@ -31,7 +29,8 @@ namespace ADB.Config
       public string DestinationDirPattern { get; set; }
 
       /// <summary>
-      /// Build Configuration
+      /// Build Configuration;
+      /// only used to set the path of <see cref="DestinationDir"/>
       /// </summary>
       /// <example>
       /// Release or Debug
@@ -39,7 +38,7 @@ namespace ADB.Config
       public string BuildConfiguration { get; set; }
 
       /// <summary>
-      /// Runtime Identifier
+      /// REQUIRED! Runtime Identifier
       /// </summary>
       /// <seealso cref="https://docs.microsoft.com/de-de/dotnet/core/rid-catalog"/>
       public string RID { get; set; }
