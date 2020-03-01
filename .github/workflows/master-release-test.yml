@@ -10,8 +10,7 @@ on:
 
 jobs:
   build_release:
-    name: Build & Release
-    #no integration tests so far
+    name: Build Base
     runs-on: ubuntu-latest
 
     steps:
@@ -41,24 +40,31 @@ jobs:
         uses: release-drafter/release-drafter@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  
-        #Pack variants
-        #TODO: a) should work parallel b) less redundant code
-        #Variant: Win64
-      - name: Publish win-x64 - Dotnet Publish Release
+
+  build_release_variants:
+    name: Build and publish variants
+    runs-on: ubuntu-latest
+    needs: [build_release]
+    strategy:
+      matrix:
+        os: [win-x64, linux-x64, osx-x64]
+        configuration: [Release]
+    
+    steps:
+      - name: Publish ${{ matrix.os }} ${{ matrix.configuration }} - Dotnet Publish 
         working-directory: Aves
-        run: dotnet publish -c Release -r win-x64 /p:PublishSingleFile=true
+        run: dotnet publish -c ${{ matrix.configuration }} -r ${{ matrix.os }} /p:PublishSingleFile=true
                 
-      - name: Download dependencies of win-x64 - ADB
+      - name: Download dependencies of ${{ matrix.os }} - ADB
         working-directory: build
-        run: ./ADB -c config.json --rid win-x64 --bc Release
-        timeout-minutes: 10
+        run: ./ADB -c config.json --rid ${{ matrix.os }} --bc ${{ matrix.configuration }}
+        timeout-minutes: 3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
         #Ignore pdb files
-      - name: Pack win-x64 - Zip
-        working-directory: Aves/bin/Release/netcoreapp3.1/win-x64/publish/
+      - name: Pack ${{ matrix.os }} - Zip
+        working-directory: Aves/bin/${{ matrix.configuration }}/netcoreapp3.1/${{ matrix.os }}/publish/
         run: zip -r Aves.zip . -x \*.pdb
         
       - name: Release win-x64 - Upload Release Asset
@@ -67,7 +73,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_draft.outputs.upload_url }} 
-          asset_path: ./Aves/bin/Release/netcoreapp3.1/win-x64/publish/Aves.zip
-          asset_name: Aves-win-x64.zip
+          asset_path: ./Aves/bin/${{ matrix.configuration }}/netcoreapp3.1/${{ matrix.os }}/publish/Aves.zip
+          asset_name: Aves-${{ matrix.os }}.zip
           asset_content_type: application/zip
-          
+  
