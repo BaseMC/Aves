@@ -55,7 +55,7 @@ jobs:
       - name: Save Asset Upload URL to File
         shell: bash
         run: |
-          ${{ steps.create_draft.outputs.upload_url }} > asset_upload_url.txt
+          echo ${{ steps.create_draft.outputs.upload_url }} > asset_upload_url.txt
         
       - name: Upload Asset Upload URL - Upload Artifact
         uses: actions/upload-artifact@v1
