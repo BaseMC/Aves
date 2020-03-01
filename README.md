@@ -176,16 +176,6 @@ Build the project yourself:
 ### Requirements
 * [.NET CORE 3.1 SDK](https://dotnet.microsoft.com/download/dotnet-core/3.1)
 
-### Get required dependencies
-* Build ``ADB`` with Configuration ``Debug``
-* Copy [build-dev.json](build/build-dev.json) into your ``ADB`` build output folder (e.g. ``ADB/bin/Debug/netcoreapp3.1``)
-* Run in the ``ADB`` build output folder: ``ADB.exe -c build-dev.json -r <yourSystemRID>``
-  * You can get the corresponding RID [here](https://docs.microsoft.com/en-us/dotnet/core/rid-catalog)<br/>Most common:
-    * ``win-x64`` Windows 64bit
-    * ``linux-x64`` Linux 64bit
-    * ``osx-x64`` Mac OS X 64bit
-* Copy all files from the generated ``dev`` folder into your ``Aves`` build output folder
-
 ### Build an executable
 * Open a new commandline / shell in the repository-root
 * Build the project ``dotnet build``
@@ -200,6 +190,21 @@ Build the project yourself:
 * [javgent](https://github.com/BaseMC/javgent)
 * [avesflower](https://github.com/BaseMC/avesflower)
 
-## Tools for developing
+## Develop
+### Tools for developing
 * [Visual Studio 2019](https://visualstudio.microsoft.com/de/vs/)
 * [SonarLint VS](https://www.sonarlint.org/visualstudio/)
+
+### Get required dependencies for ``Aves``
+* Build ``ADB`` with Configuration ``Debug``
+* Copy [build-dev.json](build/build-dev.json) into your ``ADB`` build output folder (e.g. ``ADB/bin/Debug/netcoreapp3.1``)
+* Run in the ``ADB`` build output folder: ``ADB.exe -c build-dev.json -r <yourSystemRID>``
+  * You can get the corresponding RID [here](https://docs.microsoft.com/en-us/dotnet/core/rid-catalog)<br/>Most common:
+    * ``win-x64`` Windows 64bit
+    * ``linux-x64`` Linux 64bit
+    * ``osx-x64`` Mac OS X 64bit
+* Copy all files from the generated ``dev`` folder into your ``Aves`` build output folder (e.g. ``Aves/bin/Debug/netcoreapp3.1``)
+
+#### :warning: Notes
+* The files are usually kept until a (forced) rebuild is carried out 
+* You should update this files regularly
