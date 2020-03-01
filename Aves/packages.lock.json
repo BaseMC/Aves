@@ -266,6 +266,12 @@
           "System.Runtime": "4.1.0"
         }
       },
+      "aves.shared": {
+        "type": "Project",
+        "dependencies": {
+          "CoreFrameworkBase": "1.0.7362.34319"
+        }
+      },
       "coreframeworkbase": {
         "type": "Project",
         "dependencies": {

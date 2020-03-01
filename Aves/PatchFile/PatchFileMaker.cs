@@ -1,5 +1,6 @@
 ﻿using Aves.Config;
 using Aves.PatchFile.ComModel;
+using Aves.Shared;
 using Aves.Util;
 using Newtonsoft.Json;
 using System;
@@ -27,20 +28,15 @@ namespace Aves.PatchFile
       {
          Log.Info("PatchFileMaker starting");
 
-         var tasklist = new List<Task>();
-
-         foreach (var variant in Config.VariantConfigs.Where(v => v.Enabled))
-            tasklist.Add(Task.Run(() => GeneratePatchFile(variant)));
-
-         var mastertask = Task.WhenAll(tasklist);
-         mastertask.Wait();
-
-         Log.Info("All tasks finished!");
-
-         if (!mastertask.IsCompletedSuccessfully)
-            throw new InvalidOperationException("One or more tasks failed");
-
-         Log.Info("All tasks successful!");
+         TaskRunner.RunTasks(
+           Config.VariantConfigs.Where(v => v.Enabled)
+              .Select(variant =>
+                 new Action(() =>
+                    GeneratePatchFile(variant))
+                 )
+              .ToArray()
+           );
+         Log.Info("All tasks successfully finished!");
 
          Log.Info("PatchFileMaker finished");
       }

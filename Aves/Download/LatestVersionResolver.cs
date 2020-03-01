@@ -12,7 +12,7 @@ namespace Aves.Download
    /// <summary>
    /// Resolves the latest version
    /// </summary>
-   public class LatestVersionResolver : Downloader
+   public class LatestVersionResolver : DownloadTask
    {
       public static readonly ImmutableDictionary<string, string[]> IDFSTR = new Dictionary<string, string[]>() {
          {

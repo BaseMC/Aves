@@ -1,15 +1,13 @@
 ﻿using CoreFrameworkBase.Config;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace Aves.Config
 {
    public class Configuration : JsonConfig
    {
-      public const string EMBEDDED_Deobfuscator = "javgent-standalone.jar";
-      public const string EMBEDDED_Decompiler = "avesflower.jar";
-
       /// <summary>
       /// Trys to download the jars over the network; if false you have to add the files manually
       /// </summary>
@@ -76,17 +74,17 @@ namespace Aves.Config
       public bool MakeJavaCompatible { get; set; } = true;
 
       /// <summary>
-      /// Java Installation Dir; if not set autodetect
+      /// Java Installation Dir; if not set autodetect; default is provided JRE under /jre/bin/java.exe
       /// </summary>
       /// <example>
       /// "C:\Program Files\Java\jre1.11.0_XXX\bin\java.exe"
       /// </example>
-      public string JavaExePath { get; set; }
+      public string JavaExePath { get; set; } = Path.Combine("jre", "bin", "java.exe");
 
       /// <summary>
-      /// Deobfuscator; if not absloute: relative to <see cref="WorkingDirectory"/>; if null -> <see cref="EMBEDDED_Deobfuscator"/>
+      /// Deobfuscator; if not absloute: relative to <see cref="WorkingDirectory"/>
       /// </summary>
-      public string Deobfuscator { get; set; } = null;
+      public string Deobfuscator { get; set; } = "javgent-standalone.jar";
 
       /// <summary>
       /// Timeout for Deobfuscator, null = no timeout
@@ -99,9 +97,9 @@ namespace Aves.Config
       public string BaseDeobfuscatorCommand { get; set; } = "-jar \"{0}\" -s \"{1}\" -m \"{2}\" -o \"{3}\"";
 
       /// <summary>
-      /// Decompiler; if not absloute: relative to <see cref="WorkingDirectory"/>; if null -> <see cref="EMBEDDED_Decompiler"/>
+      /// Decompiler; if not absloute: relative to <see cref="WorkingDirectory"/>
       /// </summary>
-      public string Decompiler { get; set; } = null;
+      public string Decompiler { get; set; } = "avesflower.jar";
 
       /// <summary>
       /// Timeout for Decompiler, null = no timeout

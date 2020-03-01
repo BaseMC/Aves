@@ -1,0 +1,80 @@
+name: Test CI
+
+on: 
+  push:
+    branches: 
+      - master-release-test*
+
+# Don't use a cache here: 
+#  This is the last instance that can detect missing dependecies
+
+jobs:
+  build_release:
+    name: Build & Release
+    #no integration tests so far
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup - .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.102
+      
+      - name: Build - Dotnet Build Release
+        run: dotnet build --configuration Release
+        
+        #Build and prepare build tool
+      - name: Publish build tool - ADB
+        working-directory: ADB
+        run: dotnet publish -c Release
+                      
+      - name: Move build tool to build folder - ADB
+        run: cp ADB/bin/Release/netcoreapp3.1/publish/* build
+      
+      - name: Self test build tool - ADB
+        working-directory: build
+        run: ./ADB --version
+        
+      - name: Release - Create Draft for Release
+        id: create_draft
+        uses: release-drafter/release-drafter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  
+        #Pack variants
+        #TODO: a) should work parallel b) less redundant code
+        #Variant: Win64
+      - name: Publish win-x64 - Dotnet Publish Release
+        working-directory: Aves
+        run: dotnet publish -c Release -r win-x64 /p:PublishSingleFile=true
+                
+      - name: Download dependencies of win-x64 - ADB
+        working-directory: build
+        run: ./ADB -c config.json --rid win-x64 --bc Release
+        timeout-minutes: 10
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+        #Ignore pdb files
+      - name: Pack win-x64 - Zip
+        working-directory: Aves/bin/Release/netcoreapp3.1/win-x64/publish/
+        run: zip -r Aves.zip . -x \*.pdb
+        
+      - name: DEBUG OUTPUTFOLDER
+        working-directory: Aves/bin/Release/netcoreapp3.1/win-x64/publish/
+        run: ls -lh
+        
+      - name: DEBUG UploadUrl
+        run: echo ${{ steps.create_draft.outputs.upload_url }} 
+        
+      - name: Release win-x64 - Upload Release Asset
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_draft.outputs.upload_url }} 
+          asset_path: ./Aves/bin/Release/netcoreapp3.1/win-x64/publish/Aves.zip
+          asset_name: Aves-win-x64.zip
+          asset_content_type: application/zip
+          
