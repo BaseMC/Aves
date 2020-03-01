@@ -87,6 +87,9 @@ jobs:
           name: ADB
           path: ADB.zip
           
+      - name: DEBUG
+        run: ls -lha
+                  
       - name: Unzip ADB
         run: unzip ADB.zip -d build
           
