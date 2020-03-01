@@ -1,5 +1,6 @@
 branches:
   - master
+  - master-release-test*
 name-template: "v$NEXT_MINOR_VERSION"
 tag-template: "v$NEXT_MINOR_VERSION"
 template: |
