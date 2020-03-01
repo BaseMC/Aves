@@ -3,7 +3,7 @@ name: Test CI
 on: 
   push:
     branches: 
-      - master-release-test*
+      - master-release-test
 
 # Don't use a cache here: 
 #  This is the last instance that can detect missing dependecies
