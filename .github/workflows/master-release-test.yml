@@ -79,6 +79,16 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: asset_upload_url
+          path: asset_upload_url.txt
+          
+      - name: Download ADB - Download Artifact
+        uses: actions/download-artifact@v1
+        with:
+          name: ADB
+          path: ADB.zip
+          
+      - name: Unzip ADB
+        run: unzip ADB.zip -d build
           
       - name: Fake steps.create_draft.outputs.upload_url from predecessor
         id: create_draft
