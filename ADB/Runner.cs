@@ -33,9 +33,6 @@ namespace ADB
             throw new ArgumentException($"{nameof(Config.GitHubConfig.GitHubToken)}[='****'] is invalid");
 #endif
 
-         if (string.IsNullOrWhiteSpace(Config.BuildConfiguration))
-            throw new ArgumentException($"{nameof(Config.BuildConfiguration)}[='{Config.BuildConfiguration}'] is invalid");
-
          if (string.IsNullOrWhiteSpace(Config.RID))
             throw new ArgumentException($"{nameof(Config.RID)}[='{Config.RID}'] is invalid");
 
@@ -44,8 +41,10 @@ namespace ADB
             if (string.IsNullOrWhiteSpace(Config.DestinationDirPattern))
                throw new ArgumentException($"{nameof(Config.DestinationDirPattern)}[='{Config.DestinationDirPattern}'] is invalid");
             var destDir = Config.DestinationDirPattern.Replace('/', Path.DirectorySeparatorChar)
-               .Replace($"{{{nameof(Config.BuildConfiguration)}}}", Config.BuildConfiguration)
                .Replace($"{{{nameof(Config.RID)}}}", Config.RID);
+
+            if (Config.BuildConfiguration != null)
+               destDir = destDir.Replace($"{{{nameof(Config.BuildConfiguration)}}}", Config.BuildConfiguration);
 
             Log.Info($"SetInp: {nameof(Config.DestinationDir)}='{destDir}'");
             Config.DestinationDir = destDir;

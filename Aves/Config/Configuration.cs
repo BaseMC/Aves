@@ -74,7 +74,11 @@ namespace Aves.Config
       public bool MakeJavaCompatible { get; set; } = true;
 
       /// <summary>
-      /// Java Installation Dir; if not set autodetect; default is provided JRE under /jre/bin/java.exe
+      /// Java Installation Dir
+      /// <para/>
+      /// if not set autodetect; default is provided JRE under jre/bin/java.exe
+      /// <para/>
+      /// if not absloute: relative to <see cref="AppDomain.CurrentDomain.BaseDirectory"/>
       /// </summary>
       /// <example>
       /// "C:\Program Files\Java\jre1.11.0_XXX\bin\java.exe"
@@ -82,7 +86,7 @@ namespace Aves.Config
       public string JavaExePath { get; set; } = Path.Combine("jre", "bin", "java.exe");
 
       /// <summary>
-      /// Deobfuscator; if not absloute: relative to <see cref="WorkingDirectory"/>
+      /// Deobfuscator; if not absloute: relative to <see cref="AppDomain.CurrentDomain.BaseDirectory"/>
       /// </summary>
       public string Deobfuscator { get; set; } = "javgent-standalone.jar";
 
@@ -97,7 +101,7 @@ namespace Aves.Config
       public string BaseDeobfuscatorCommand { get; set; } = "-jar \"{0}\" -s \"{1}\" -m \"{2}\" -o \"{3}\"";
 
       /// <summary>
-      /// Decompiler; if not absloute: relative to <see cref="WorkingDirectory"/>
+      /// Decompiler; if not absloute: relative to <see cref="AppDomain.CurrentDomain.BaseDirectory"/>
       /// </summary>
       public string Decompiler { get; set; } = "avesflower.jar";
 

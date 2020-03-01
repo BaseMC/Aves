@@ -179,16 +179,32 @@ Build the project yourself:
 ### Build an executable
 * Open a new commandline / shell in the repository-root
 * Build the project ``dotnet build``
-* go into the subfolder ``Aves`` (main project)
-* Create an executable with ``dotnet publish -r <TargetedRuntime(OS)Identifier> -p:PublishSingleFile=true``
-  * for the targeted ``RuntimeIdentfier`` see https://docs.microsoft.com/de-de/dotnet/core/rid-catalog
+* Select the subfolder ``Aves`` (main project) and create an executable with ``dotnet publish -r <TargetedRuntime(OS)Identifier> -p:PublishSingleFile=true``
+  * for the targeted ``RuntimeIdentfier`` see https://docs.microsoft.com/en-us/dotnet/core/rid-catalog
   * example for windows: ``dotnet publish -r win10-x64 -p:PublishSingleFile=true``
-* <b> TODO: Doc Run build tool ADB</b>
+* Go back into the root and publish ADB (select the corresponding subfolder) ``dotnet publish -c Release``
+* Copy the generated content (e.g. ``ADB/bin/Debug/netcoreapp3.1/publish``) into the ``build`` folder under the directory rot
+* Run ``ADB.exe -r <TargetedRuntime(OS)Identifier> --bc <YourConfiguration(Release/Debug)>``
 
 ### Nested projects
 * [javgent](https://github.com/BaseMC/javgent)
 * [avesflower](https://github.com/BaseMC/avesflower)
 
-## Tools for developing
+## Develop
+### Tools for developing
 * [Visual Studio 2019](https://visualstudio.microsoft.com/de/vs/)
 * [SonarLint VS](https://www.sonarlint.org/visualstudio/)
+
+### Get required dependencies for ``Aves``
+* Build ``ADB`` with Configuration ``Debug``
+* Copy [build-dev.json](build/build-dev.json) into your ``ADB`` build output folder (e.g. ``ADB/bin/Debug/netcoreapp3.1``)
+* Run in the ``ADB`` build output folder: ``ADB.exe -c build-dev.json -r <yourSystemRID>``
+  * You can get the corresponding RID [here](https://docs.microsoft.com/en-us/dotnet/core/rid-catalog)<br/>Most common:
+    * ``win-x64`` Windows 64bit
+    * ``linux-x64`` Linux 64bit
+    * ``osx-x64`` Mac OS X 64bit
+* Copy all files from the generated ``dev`` folder into your ``Aves`` build output folder (e.g. ``Aves/bin/Debug/netcoreapp3.1``)
+
+#### :warning: Notes
+* The files are usually kept until a (forced) rebuild is carried out 
+* You should update this files regularly
