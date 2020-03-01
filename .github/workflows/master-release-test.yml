@@ -5,20 +5,25 @@ on:
     branches: 
       - master-release-test
 
+env:
+  dotnet-version: 3.1.102
+  job-os-runner: ubuntu-latest
+
 # Don't use a cache here: 
 #  This is the last instance that can detect missing dependecies
 
 jobs:
   build_release:
-    name: Build Base
-    runs-on: ubuntu-latest
+    name: Base
+    runs-on: ${{ env.job-os-runner }}
 
     steps:
       - uses: actions/checkout@v1
-      - name: Setup - .NET Core
+        
+      - name: Setup .NET Core ${{ env.dotnet-version }}
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 3.1.102
+          dotnet-version: ${{ env.dotnet-version }}
       
       - name: Build - Dotnet Build Release
         run: dotnet build --configuration Release
@@ -27,23 +32,44 @@ jobs:
       - name: Publish build tool - ADB
         working-directory: ADB
         run: dotnet publish -c Release
-                      
-      - name: Move build tool to build folder - ADB
-        run: cp ADB/bin/Release/netcoreapp3.1/publish/* build
       
       - name: Self test build tool - ADB
-        working-directory: build
+        working-directory: ADB/bin/Release/netcoreapp3.1/publish
         run: ./ADB --version
+      
+      - name: Pack ADB - ADB
+        working-directory: ADB/bin/Release/netcoreapp3.1/publish
+        run: zip -r ADB.zip . -x \*.pdb
         
+      - name: Upload ADB - Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: ADB
+          path: ADB/bin/Release/netcoreapp3.1/publish/ADB.zip
+                      
+     # - name: Move build tool to build folder - ADB
+      #  run: cp ADB/bin/Release/netcoreapp3.1/publish/* build
+      
       - name: Release - Create Draft for Release
         id: create_draft
         uses: release-drafter/release-drafter@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+      - name: Save Asset Upload URL to File
+        shell: bash
+        run: |
+          ${{ steps.create_draft.outputs.upload_url }} > asset_upload_url.txt
+        
+      - name: Upload Asset Upload URL - Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: asset_upload_url
+          path: asset_upload_url.txt
 
   build_release_variants:
-    name: Build and publish variants
-    runs-on: ubuntu-latest
+    name: Variants
+    runs-on:  ${{ env.job-os-runner }}
     needs: [build_release]
     strategy:
       matrix:
@@ -51,6 +77,22 @@ jobs:
         configuration: [Release]
     
     steps:
+      - uses: actions/checkout@v1
+      
+      - name: Download Asset Upload URL - Download Artifact
+        uses: actions/download-artifact@v1
+        with:
+          name: asset_upload_url
+          
+      - name: Fake steps.create_draft.outputs.upload_url from predecessor
+        id: create_draft
+        run: echo "::set-output name=upload_url::$(cat asset_upload_url.txt)"
+      
+      - name: Setup .NET Core ${{ env.dotnet-version }}
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.dotnet-version }}
+              
       - name: Publish ${{ matrix.os }} ${{ matrix.configuration }} - Dotnet Publish 
         working-directory: Aves
         run: dotnet publish -c ${{ matrix.configuration }} -r ${{ matrix.os }} /p:PublishSingleFile=true
