@@ -90,6 +90,9 @@ jobs:
       - name: DEBUG
         run: ls -lha
                   
+      - name: DEBUG
+        run: pwd
+        
       - name: Unzip ADB
         run: unzip ADB.zip -d build
           
