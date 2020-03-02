@@ -2,6 +2,7 @@
 using Aves.Download;
 using Aves.MakeRead;
 using Aves.PatchFile;
+using Aves.Shared;
 using Aves.Util;
 using System;
 using System.Collections.Generic;
@@ -28,18 +29,39 @@ namespace Aves
 
       private void Init()
       {
+         //Check inputs
          if (string.IsNullOrWhiteSpace(Config.Version))
             throw new ArgumentException($"{nameof(Config.Version)}[='{Config.Version}'] is invalid");
 
          if (string.IsNullOrWhiteSpace(Config.BaseDeobfuscatorCommand))
             throw new ArgumentException($"{nameof(Config.BaseDeobfuscatorCommand)}[='{Config.BaseDeobfuscatorCommand}'] is invalid");
 
+         if (string.IsNullOrWhiteSpace(Config.Deobfuscator))
+            throw new ArgumentException($"{nameof(Config.Deobfuscator)}[='{Config.Deobfuscator}'] is invalid");
+
          if (string.IsNullOrWhiteSpace(Config.BaseDecompileCommand))
             throw new ArgumentException($"{nameof(Config.BaseDecompileCommand)}[='{Config.BaseDecompileCommand}'] is invalid");
 
-         
+         if (string.IsNullOrWhiteSpace(Config.Decompiler))
+            throw new ArgumentException($"{nameof(Config.Decompiler)}[='{Config.Decompiler}'] is invalid");
+
          if (Config.WorkingDirectory == null)
             throw new ArgumentException($"{nameof(Config.WorkingDirectory)} is not set");
+
+         // Ensure Dependency executables exist
+         Config.JavaExePath = TryFindJavaExe();
+         if (string.IsNullOrEmpty(Config.JavaExePath))
+            throw new ArgumentException($"JavaExePath[='{Config.JavaExePath}'] is invalid");
+
+         Log.Info($"Set {nameof(Config.JavaExePath)}='{Config.JavaExePath}'");
+         
+         Config.Deobfuscator = BuildPathForExecutableLocation(nameof(Config.Deobfuscator), Config.Deobfuscator);
+         Log.Info($"Set {nameof(Config.Deobfuscator)}='{Config.Deobfuscator}'");
+
+         Config.Decompiler = BuildPathForExecutableLocation(nameof(Config.Decompiler), Config.Decompiler);
+         Log.Info($"Set {nameof(Config.Decompiler)}='{Config.Decompiler}'");
+
+         //Ensure Directories and files
 
          DirUtil.EnsureCreated(Config.WorkingDirectory);
 
@@ -140,10 +162,6 @@ namespace Aves
             DirUtil.EnsureCreated(variant.OutputFilesDirFolder);
          }
 
-         Log.Info($"Set {nameof(Config.Deobfuscator)}={(Config.Deobfuscator == null ? $"DEFAULT ({Configuration.EMBEDDED_Deobfuscator})" : $"'{Config.Deobfuscator}'")}");
-
-         Log.Info($"Set {nameof(Config.Decompiler)}={(Config.Decompiler == null ? $"DEFAULT ({Configuration.EMBEDDED_Decompiler})" : $"'{Config.Decompiler}'")}");
-
          if (Config.NetworkIncludeClientLibs || Config.NetworkIncludeLogging)
          {
             Config.OutputDirectoryMetaFiles = BuildPath(nameof(Config.OutputDirectoryMetaFiles), Config.OutputDirectoryMetaFiles, Config.VersionWorkingDirectory);
@@ -164,19 +182,13 @@ namespace Aves
             }
          }
 
-         Config.JavaExePath = TryFindJavaExe();
-         if(string.IsNullOrEmpty(Config.JavaExePath))
-            throw new ArgumentException($"JavaExePath[='{Config.JavaExePath}'] is invalid");
-
-         Log.Info($"Set {nameof(Config.JavaExePath)}='{Config.JavaExePath}'");
       }
 
       private string TryFindJavaExe()
       {
-         string javaExePath = Config.JavaExePath;
+         string javaExePath = BuildPathForExecutableLocation(nameof(Config.JavaExePath), Config.JavaExePath);
          if (!string.IsNullOrEmpty(javaExePath))
          {
-            BuildPath(nameof(Config.JavaExePath), Config.JavaExePath);
             if (File.Exists(javaExePath))
             {
                Log.Info("Found valid location of java in configuration");
@@ -222,20 +234,14 @@ namespace Aves
          return null;
       }
 
-      private string BuildPath(string name, string path, string relativeParent = null)
+      private string BuildPath(string name, string path, string relativeParent)
       {
-         if (path == null)
-            throw new ArgumentException($"{name} is not set");
+         return PathBuilder.BuildPath(name, path, relativeParent);
+      }
 
-         //May throw exception
-         if (Path.IsPathRooted(path))
-            return path;
-
-         //May throw exception
-         if (Path.GetFullPath(path) == null)
-            throw new ArgumentException($"Weird stuff happens; The path[='{path}'] couldn't be resolved to a full path (was null)");
-
-         return Path.Combine(relativeParent, path);
+      private string BuildPathForExecutableLocation(string name, string path)
+      {
+         return PathBuilder.BuildPath(name, path, AppDomain.CurrentDomain.BaseDirectory);
       }
 
       #endregion Init
