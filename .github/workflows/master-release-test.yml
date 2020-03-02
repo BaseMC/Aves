@@ -79,26 +79,20 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: asset_upload_url
-          path: asset_upload_url.txt
+          path: temp_artf/asset_upload_url
           
       - name: Download ADB - Download Artifact
         uses: actions/download-artifact@v1
         with:
           name: ADB
-          path: ADB.zip
-          
-      - name: DEBUG
-        run: ls -lha
-                  
-      - name: DEBUG
-        run: pwd
-        
+          path: temp_artf/ADB
+             
       - name: Unzip ADB
-        run: unzip ADB.zip -d build
+        run: unzip temp_artf/ADB/ADB.zip -d build
           
       - name: Fake steps.create_draft.outputs.upload_url from predecessor
         id: create_draft
-        run: echo "::set-output name=upload_url::$(cat asset_upload_url.txt)"
+        run: echo "::set-output name=upload_url::$(cat temp_artf/asset_upload_url/asset_upload_url.txt)"
       
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
