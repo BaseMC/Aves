@@ -6,6 +6,7 @@ using System.Diagnostics.Contracts;
 using System.IO;
 using System.Text;
 using System.Linq;
+using static CoreFrameworkBase.Config.JsonConfig;
 
 namespace Aves
 {
@@ -65,7 +66,7 @@ namespace Aves
             Config.Config.SavePath = CmdOption.ConfigPath;
 
          Log.Info($"Loading '{Config.Config.SavePath}'");
-         Config.Load();
+         Config.Load(LoadFileNotFoundAction.NONE);
 
          Log.Info($"Loading: success");
       }

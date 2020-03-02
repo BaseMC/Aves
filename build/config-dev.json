@@ -1,0 +1,32 @@
+{
+  "DestinationDir": "dev",
+  "DestinationDirPattern": null,
+  "BuildConfiguration": null,
+  "RID": null,
+  "GitHubConfig": {
+    "ProjectConfigs": [
+	  {
+        "Owner": "BaseMC",
+        "Repo": "javgent"
+      },
+	  {
+        "Owner": "BaseMC",
+        "Repo": "avesflower"
+      }
+    ]
+  },
+  "JavaConfig": {
+    "DestinationSubDir": "jre",
+    "RemoteBaseURL": "https://api.adoptopenjdk.net/v3/assets/feature_releases/{feature_version}/{release_type}",
+    "FeatureVersion": 11,
+    "ReleaseType": "ga",
+    "Architecture": null,
+    "ImageType": "jre",
+    "JVMImpl": "hotspot",
+    "OS": null,
+    "PageSize": 1,
+    "Project": "jdk",
+    "SortOrder": "DESC",
+    "Vendor": "adoptopenjdk"
+  }
+}

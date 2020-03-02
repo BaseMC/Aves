@@ -5,6 +5,8 @@ using Aves.Config;
 using System;
 using System.Collections.Generic;
 using CoreFrameworkBase.Crash;
+using System.Linq;
+using System.Reflection;
 
 namespace Aves
 {
@@ -29,6 +31,12 @@ namespace Aves
          Parser.Default.ParseArguments<CmdOption>(args)
                   .WithParsed((opt) =>
                   {
+                     if (opt.ShowVersion)
+                     {
+                        Console.WriteLine($"{Assembly.GetExecutingAssembly().GetName().Name} {Assembly.GetExecutingAssembly().GetName().Version}");
+                        return;
+                     }
+
                      LoggerInitializer.Current.InitLogger(opt.LogToFile);
 
                      var starter = new StartUp(opt);
@@ -36,6 +44,16 @@ namespace Aves
                   })
                   .WithNotParsed((ex) =>
                   {
+                     if (ex.All(err =>
+                             new ErrorType[]
+                             {
+                                 ErrorType.HelpRequestedError,
+                                 ErrorType.HelpVerbRequestedError,
+                                 ErrorType.VersionRequestedError
+                             }.Contains(err.Tag))
+                       )
+                        return;
+
                      LoggerInitializer.Current.InitLogger();
                      foreach (var error in ex)
                         Log.Error($"Failed to parse: {error.Tag}");

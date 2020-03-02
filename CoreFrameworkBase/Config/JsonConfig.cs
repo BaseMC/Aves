@@ -23,20 +23,41 @@ namespace CoreFrameworkBase.Config
       protected JsonConfig()
       { }
 
-
       /// <summary>
       /// Loads from file
       /// </summary>
       /// <param name="autosaveifnotexists"><see cref="Save(bool)"/></param>
+      [Obsolete("Use Load(LoadModeIfFileNotFound)")]
       public void Load(bool autosaveifnotexists = true)
+      {
+         Load(LoadFileNotFoundAction.GENERATE_FILE);
+      }
+
+      /// <summary>
+      /// Loads from file
+      /// </summary>
+      /// <param name="fileNotFoundAction">Determine what to do if the file doesn't exists</param>
+      public void Load(LoadFileNotFoundAction fileNotFoundAction = LoadFileNotFoundAction.THROW_EX)
       {
          Contract.Assert(Config != null);
          Contract.Assert(Config.SavePath != null);
 
          if (File.Exists(Config.SavePath))
             JsonConvert.PopulateObject(File.ReadAllText(Config.SavePath), this, Config.Settings);
-         else if (autosaveifnotexists)
-            Save();
+         else
+         {
+            if (fileNotFoundAction == LoadFileNotFoundAction.THROW_EX)
+               throw new FileNotFoundException($"Could not find file '{Config.SavePath}'");
+            else if (fileNotFoundAction == LoadFileNotFoundAction.GENERATE_FILE)
+               Save();
+         }
+      }
+
+      public enum LoadFileNotFoundAction
+      {
+         NONE,
+         THROW_EX,
+         GENERATE_FILE
       }
 
       /// <summary>
@@ -95,6 +116,7 @@ namespace CoreFrameworkBase.Config
             ObjectCreationHandling = ObjectCreationHandling.Replace
          };
       }
+
    }
 
 }
