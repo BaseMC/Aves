@@ -195,7 +195,7 @@ namespace Aves
                return javaExePath;
             }
             else
-               Log.Warn("Found location of java in configuration, but was invalid. Trying to find java...");
+               Log.Warn($"Found location of java[='{javaExePath}'] in configuration, but was invalid. Trying to find java...");
          }
 
          javaExePath = Environment.GetEnvironmentVariable("JAVA_HOME");
@@ -241,7 +241,7 @@ namespace Aves
 
       private string BuildPathForExecutableLocation(string name, string path)
       {
-         return PathBuilder.BuildPath(name, path, AppDomain.CurrentDomain.BaseDirectory);
+         return PathBuilder.BuildPath(name, path, Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName));
       }
 
       #endregion Init
