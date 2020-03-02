@@ -42,6 +42,7 @@ jobs:
         with:
           name: ADB
           path: ADB/bin/Release/netcoreapp3.1/publish/ADB.zip
+        
                       
      # - name: Move build tool to build folder - ADB
       #  run: cp ADB/bin/Release/netcoreapp3.1/publish/* build
@@ -55,7 +56,7 @@ jobs:
       - name: Save Asset Upload URL to File
         shell: bash
         run: |
-          echo ${{ steps.create_draft.outputs.upload_url }} > asset_upload_url.txt
+          echo '${{ steps.create_draft.outputs.upload_url }}' > asset_upload_url.txt
         
       - name: Upload Asset Upload URL - Upload Artifact
         uses: actions/upload-artifact@v1
