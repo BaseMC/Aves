@@ -23,24 +23,26 @@ namespace Aves.MakeRead.Provider
       {
          lock (_lockObject)
          {
-            var decompTask = Task.Run(() => RunDecompile(config, variantConfig));
+            var decompTask = Task.Run(() => RunDecompiler(config, variantConfig));
             decompTask.Wait();
 
             return decompTask.IsCompletedSuccessfully;
          }
       }
 
-      private void RunDecompile(Configuration config, VariantConfig variant)
+      private void RunDecompiler(Configuration config, VariantConfig variant)
       {
          Log.Info($"Decompiler starting for '{variant.Name}'");
 
          var parent = Directory.GetParent(variant.DecompiledFile).ToString();
          DirUtil.EnsureCreatedAndClean(parent);
 
-         var command = string.Format(config.BaseDecompileCommand,
-            config.Decompiler,
-            variant.DeObfuscatedFile,
-            parent);
+         var formattedBaseCommand = config.BaseDecompileCommand
+            .Replace("{Decompiler}", config.Decompiler)
+            .Replace("{SrcFile}", variant.DeObfuscatedFile)
+            .Replace("{TargetDir}", parent);
+
+         var command = $"{formattedBaseCommand}";
 
          if (!ProcessUtil.RunProcess(config.JavaExePath, command, config.DecompilerTimeout))
             throw new TaskCanceledException();

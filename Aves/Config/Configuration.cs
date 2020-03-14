@@ -98,7 +98,7 @@ namespace Aves.Config
       /// <summary>
       /// Basic Deobfuscator command
       /// </summary>
-      public string BaseDeobfuscatorCommand { get; set; } = "-jar \"{0}\" -s \"{1}\" -m \"{2}\" -o \"{3}\"";
+      public string BaseDeobfuscatorCommand { get; set; } = "-jar \"{Deobfuscator}\" -s \"{SrcJar}\" -m \"{PatchFile}\" -o \"{DeObfuscatedFile}\"";
 
       /// <summary>
       /// Decompiler; if not absloute: relative to <see cref="AppDomain.CurrentDomain.BaseDirectory"/>
@@ -127,7 +127,7 @@ namespace Aves.Config
       /// </list>
       /// </remarks>
       /// <seealso cref="https://github.com/BaseMC/fernflower"/>
-      public string BaseDecompileCommand { get; set; } = "-jar \"{0}\" -dgs=1 -rsy=1 -lit=1 -mpm=60 \"{1}\" \"{2}\"";
+      public string BaseDecompileCommand { get; set; } = "-jar \"{Decompiler}\" -dgs=1 -rsy=1 -lit=1 -mpm=60 \"{SrcFile}\" \"{TargetDir}\"";
 
 #region Workdir
 
