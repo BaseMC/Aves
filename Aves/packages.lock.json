@@ -280,7 +280,10 @@
         }
       },
       "aves.shared": {
-        "type": "Project"
+        "type": "Project",
+        "dependencies": {
+          "Litetex.CoreFrameworkBase": "1.0.7385.37039"
+        }
       }
     }
   }

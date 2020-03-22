@@ -13,4 +13,8 @@
     
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Litetex.CoreFrameworkBase" Version="1.0.7385.37039" />
+  </ItemGroup>
+
 </Project>
