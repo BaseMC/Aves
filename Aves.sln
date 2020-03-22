@@ -5,16 +5,14 @@ VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aves", "Aves\Aves.csproj", "{BA5A26A8-95D9-47B8-864B-37EBAA6D166F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreFrameworkBase", "CoreFrameworkBase\CoreFrameworkBase.csproj", "{7495BB9F-0377-4977-BD0E-F03DF1A4B997}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{14EC827D-1820-4B23-A65D-AAFEEADA17F3}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADB", "ADB\ADB.csproj", "{6F6DF492-5EEE-4A2D-BBC9-483B27D13C19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ADB", "ADB\ADB.csproj", "{6F6DF492-5EEE-4A2D-BBC9-483B27D13C19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aves.Shared", "Aves.Shared\Aves.Shared.csproj", "{E73C7CBB-E711-4336-9BCD-4392853471AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aves.Shared", "Aves.Shared\Aves.Shared.csproj", "{E73C7CBB-E711-4336-9BCD-4392853471AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,10 +24,6 @@ Global
 		{BA5A26A8-95D9-47B8-864B-37EBAA6D166F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA5A26A8-95D9-47B8-864B-37EBAA6D166F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA5A26A8-95D9-47B8-864B-37EBAA6D166F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7495BB9F-0377-4977-BD0E-F03DF1A4B997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7495BB9F-0377-4977-BD0E-F03DF1A4B997}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7495BB9F-0377-4977-BD0E-F03DF1A4B997}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7495BB9F-0377-4977-BD0E-F03DF1A4B997}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6F6DF492-5EEE-4A2D-BBC9-483B27D13C19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6F6DF492-5EEE-4A2D-BBC9-483B27D13C19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F6DF492-5EEE-4A2D-BBC9-483B27D13C19}.Release|Any CPU.ActiveCfg = Release|Any CPU
