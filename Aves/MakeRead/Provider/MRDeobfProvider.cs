@@ -36,11 +36,13 @@ namespace Aves.MakeRead.Provider
 
          DirUtil.EnsureCreatedAndClean(Directory.GetParent(variant.DeObfuscatedFile).ToString());
 
-         var command = string.Format($"{config.BaseDeobfuscatorCommand}{(variant.ExcludedComponents.Count > 0 ? $" -ec {string.Join(",",variant.ExcludedComponents)}" : "")}",
-            config.Deobfuscator,
-            variant.SrcJar,
-            variant.PatchFile,
-            variant.DeObfuscatedFile);
+         var formattedBaseCommand = config.BaseDeobfuscatorCommand
+            .Replace("{Deobfuscator}", config.Deobfuscator)
+            .Replace("{SrcJar}", variant.SrcJar)
+            .Replace("{PatchFile}", variant.PatchFile)
+            .Replace("{DeObfuscatedFile}", variant.DeObfuscatedFile);
+
+         var command = $"{formattedBaseCommand}{(variant.ExcludedComponents.Count > 0 ? $" -ec {string.Join(",",variant.ExcludedComponents)}" : "")}";
 
          if (!ProcessUtil.RunProcess(config.JavaExePath, command, config.DeobfuscatorTimeout))
             throw new TaskCanceledException();

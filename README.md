@@ -1,15 +1,23 @@
-[![Build](https://img.shields.io/github/workflow/status/BaseMC/Aves/Master%20CI)](https://github.com/BaseMC/Aves/actions)
+[![Build](https://img.shields.io/github/workflow/status/BaseMC/Aves/Master%20CI)](https://github.com/BaseMC/Aves/actions?query=workflow%3A%22Master+CI%22)
 [![Latest Version](https://img.shields.io/github/v/release/BaseMC/Aves)](https://github.com/BaseMC/Aves/releases)
-[![Build Develop](https://dev.azure.com/BaseMC/Aves/_apis/build/status/Develop?label=build%20develop)](https://dev.azure.com/BaseMC/Aves/_build/latest?definitionId=1)
+[![Build develop](https://dev.azure.com/BaseMC/Aves/_apis/build/status/Develop?label=build%20develop)](https://dev.azure.com/BaseMC/Aves/_build/latest?definitionId=1)
 
 # Aves
 A Minecraft deobfusctor / code generator
 
-Generates deobfuscated code based on the [emitted obfuscation files from mojang](https://www.minecraft.net/article/minecraft-snapshot-19w36a) (since 19w36a)
+Generates deobfuscated code based on the [emitted obfuscation files from mojang](https://www.minecraft.net/article/minecraft-snapshot-19w36a) (since 19w36a) in 5 minutes
 
 ``platform independent`` ``no local installation of Minecraft required``
 
-### Why?
+## Requirements
+* Internet connection
+* Recommended: 1.5-2GB of RAM for the [decompiler](https://github.com/BaseMC/avesflower)
+* You can only use the generated code under mojang's license: <br/> ``(c) 2019 Microsoft Corporation.  All rights reserved.  This information is provided "as-is" and you bear the risk of using it. This information does not provide you with any legal rights to any intellectual property in any Microsoft product. You may copy and use this information for your internal, reference purposes. Microsoft makes no warranties, express or implied, with respect to the information provided here.``
+
+## Download
+Get the [latest release](https://github.com/BaseMC/Aves/releases/latest)
+
+## Why?
 This project is designed for people that want to quickly take a look at a part of the code and understand what is going on.
 
 This is very useful e.g.<br/>- for quickly inspecting new versions <br/>- or if you find a bug and want to know where it comes from <br/>- or if you are just interested in how things work :smile:<br/>
@@ -19,13 +27,6 @@ The generated code is not perfect, but it's readable and that's what it's meant 
 
 The project trys to work as automated as possible.<br/>
 So if mojang doesn't do any (breaking) changes, it should work a long time.
-
-## Requirements
-* Recommended: 1.5-2GB of RAM for the [decompiler](https://github.com/BaseMC/avesflower)
-* You can only use the generated code under mojang's license: <br/> ``(c) 2019 Microsoft Corporation.  All rights reserved.  This information is provided "as-is" and you bear the risk of using it. This information does not provide you with any legal rights to any intellectual property in any Microsoft product. You may copy and use this information for your internal, reference purposes. Microsoft makes no warranties, express or implied, with respect to the information provided here.``
-
-## Download
-* https://github.com/BaseMC/Aves/releases
 
 ## Usage / How to run it
 * Supported versions: 1.14.4 or ``>=``19w36a (1.15+)
@@ -72,7 +73,7 @@ For more detailed description take a look at the documentation of the [correspon
 
 |Argument|Meaning|Example|
 |--------|-------|-------|
-|``-l`` ``--logfile``|logs additionally to a logfile<br/> generated under ``/logs`` |``-l``|
+|``-l`` ``--logfile``|logs additionally to a logfile<br/> generated under ``logs`` |``-l``|
 |``--version``| Shows the current Aves version and does nothing else |``-version``<br/>Example ``Aves 1.0.7364.40087``<br/> Format:  ``<Name> <MainVersion>.<SubVersion>.<DaysSince2000>.<SecondsSinceMidnight/2>`` → [see also](https://stackoverflow.com/questions/356543/can-i-automatically-increment-the-file-build-version-when-using-visual-studio) |
 |``--genconf <value>``|only generates a json-Config file<br/> value = JSON-Config file to generate | ``--genconf config.json`` |
 |``-c <value>`` ``--conf <value>``|load a json-Config file<br/> value = JSON-Config file (see below) |``-c config.json`` (uses a file called config.json for configuration)|
@@ -143,10 +144,10 @@ auto-generated file:
   "JavaExePath": "jre\\bin\\java.exe",
   "Deobfuscator": null,
   "DeobfuscatorTimeout": "00:05:00",
-  "BaseDeobfuscatorCommand": "-jar \"{0}\" -s \"{1}\" -m \"{2}\" -o \"{3}\"",
+  "BaseDeobfuscatorCommand": "-jar \"{Deobfuscator}\" -s \"{SrcJar}\" -m \"{PatchFile}\" -o \"{DeObfuscatedFile}\"",
   "Decompiler": null,
   "DecompilerTimeout": "00:30:00",
-  "BaseDecompileCommand": "-jar \"{0}\" -dgs=1 -rsy=1 -lit=1 -mpm=60 \"{1}\" \"{2}\"",
+  "BaseDecompileCommand": "-jar \"{Decompiler}\" -dgs=1 -rsy=1 -lit=1 -mpm=60 \"{SrcFile}\" \"{TargetDir}\"",
   "WorkingDirectory": "workingDir",
   "VersionWorkingDirectory": null,
   "RawDirectory": "raw",
@@ -182,8 +183,8 @@ Build the project yourself:
 * Select the subfolder ``Aves`` (main project) and create an executable with ``dotnet publish -r <TargetedRuntime(OS)Identifier> -p:PublishSingleFile=true``
   * for the targeted ``RuntimeIdentfier`` see https://docs.microsoft.com/en-us/dotnet/core/rid-catalog
   * example for windows: ``dotnet publish -r win10-x64 -p:PublishSingleFile=true``
-* Go back into the root and publish ADB (select the corresponding subfolder) ``dotnet publish -c Release``
-* Copy the generated content (e.g. ``ADB/bin/Debug/netcoreapp3.1/publish``) into the ``build`` folder under the directory rot
+* Go back into the root, select [ADB](ADB) and publish it ``dotnet publish -c Release``
+* Copy the generated content (e.g. ``ADB/bin/Debug/netcoreapp3.1/publish``) into the [``build``](build) folder
 * Run ``ADB.exe -r <TargetedRuntime(OS)Identifier> --bc <YourConfiguration(Release/Debug)>``
 
 ### Nested projects
@@ -195,15 +196,16 @@ Build the project yourself:
 * [Visual Studio 2019](https://visualstudio.microsoft.com/de/vs/)
 * [SonarLint VS](https://www.sonarlint.org/visualstudio/)
 
-### Get required dependencies for ``Aves``
+### Get required external files for ``Aves``
+Aves requires some external files, e.g. a [JVM](https://adoptopenjdk.net/), a [deobfuscator](https://github.com/BaseMC/javgent) and a [decompiler](https://github.com/BaseMC/avesflower)
 * Build ``ADB`` with Configuration ``Debug``
-* Copy [build-dev.json](build/build-dev.json) into your ``ADB`` build output folder (e.g. ``ADB/bin/Debug/netcoreapp3.1``)
+* Copy [config-dev.json](build/config-dev.json) into your ``ADB`` build output folder (e.g. ``ADB/bin/Debug/netcoreapp3.1``)
 * Run in the ``ADB`` build output folder: ``ADB.exe -c build-dev.json -r <yourSystemRID>``
   * You can get the corresponding RID [here](https://docs.microsoft.com/en-us/dotnet/core/rid-catalog)<br/>Most common:
     * ``win-x64`` Windows 64bit
     * ``linux-x64`` Linux 64bit
     * ``osx-x64`` Mac OS X 64bit
-* Copy all files from the generated ``dev`` folder into your ``Aves`` build output folder (e.g. ``Aves/bin/Debug/netcoreapp3.1``)
+* Copy all files from the generated ``dev`` folder directly into your ``Aves`` build output folder (e.g. ``Aves/bin/Debug/netcoreapp3.1``)
 
 #### :warning: Notes
 * The files are usually kept until a (forced) rebuild is carried out 

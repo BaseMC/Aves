@@ -6,21 +6,22 @@
 
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
 
-    <!--Emulate 1.0.* versioning behavior-->
-    <Build>$([System.DateTime]::op_Subtraction($([System.DateTime]::get_Now().get_Date()),$([System.DateTime]::new(2000,1,1))).get_TotalDays())</Build>
-    <Revision>$([MSBuild]::Divide($([System.DateTime]::get_Now().get_TimeOfDay().get_TotalSeconds()), 2).ToString('F0'))</Revision>
-    <Version>1.0.$(Build).$(Revision)</Version>
+    <!-- Emulate .NET Frameworks versioning behavior 'GenerateVersionFromPatternAndCurrentTime' (UTC based) -->
+    <!-- https://github.com/dotnet/sdk/issues/8416#issuecomment-354095128 -->
+    <Build>$([System.DateTime]::op_Subtraction($([System.DateTime]::get_UtcNow().get_Date()),$([System.DateTime]::new(2000,1,1))).get_TotalDays())</Build>
+    <Revision>$([MSBuild]::Divide($([System.DateTime]::get_UtcNow().get_TimeOfDay().get_TotalSeconds()), 2).ToString('F0'))</Revision>
+    <VersionPrefix>1.0.$(Build).$(Revision)</VersionPrefix>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.7.82" />
+    <PackageReference Include="Litetex.CoreFrameworkBase" Version="1.0.7385.37039" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="Octokit" Version="0.42.0" />
+    <PackageReference Include="Octokit" Version="0.45.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Aves.Shared\Aves.Shared.csproj" />
-    <ProjectReference Include="..\CoreFrameworkBase\CoreFrameworkBase.csproj" />
   </ItemGroup>
 
 </Project>

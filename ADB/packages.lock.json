@@ -8,6 +8,19 @@
         "resolved": "2.7.82",
         "contentHash": "JnjxBu4++EDnYtDzHskiPrPJ9hAna8amu8qlQx8J+2oZnPddDnkR/0FFtQMDz0Cs0YF2lbyW3OmYfRmIrLNY0A=="
       },
+      "Litetex.CoreFrameworkBase": {
+        "type": "Direct",
+        "requested": "[1.0.7385.37039, )",
+        "resolved": "1.0.7385.37039",
+        "contentHash": "OA54RP8bk9VgBZqNLwv2t0EXL08hKMjD6AzYLYEBywkqCn/HWDscScleuIH98WsS4BE0vISooX48uHKjB4T7bA==",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3",
+          "Serilog": "2.9.0",
+          "Serilog.Enrichers.Thread": "3.1.0",
+          "Serilog.Sinks.Console": "3.1.1",
+          "Serilog.Sinks.File": "4.1.0"
+        }
+      },
       "Newtonsoft.Json": {
         "type": "Direct",
         "requested": "[12.0.3, )",
@@ -16,9 +29,9 @@
       },
       "Octokit": {
         "type": "Direct",
-        "requested": "[0.42.0, )",
-        "resolved": "0.42.0",
-        "contentHash": "X5EOZNjhKKyS5rXE9nmcLJHzkz1RAxSghfTcgU95sV1aX9M5PoaJU5JRU3I35xpP0bcu5bfTbEghBBoRn1y5eg=="
+        "requested": "[0.45.0, )",
+        "resolved": "0.45.0",
+        "contentHash": "hR/sPZbTLIkVmOlau4TF4Erwz9IOc1OL51ZSuu62f05/N+f7KwjHfVvQ3ypAfollQrzb9ik5vGCZh+1XHl7+dQ=="
       },
       "Microsoft.NETCore.Platforms": {
         "type": "Transitive",
@@ -275,17 +288,7 @@
       "aves.shared": {
         "type": "Project",
         "dependencies": {
-          "CoreFrameworkBase": "1.0.7365.34504"
-        }
-      },
-      "coreframeworkbase": {
-        "type": "Project",
-        "dependencies": {
-          "Newtonsoft.Json": "12.0.3",
-          "Serilog": "2.9.0",
-          "Serilog.Enrichers.Thread": "3.1.0",
-          "Serilog.Sinks.Console": "3.1.1",
-          "Serilog.Sinks.File": "4.1.0"
+          "Litetex.CoreFrameworkBase": "1.0.7385.37039"
         }
       }
     }
