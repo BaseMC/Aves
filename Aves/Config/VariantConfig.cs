@@ -15,7 +15,7 @@ namespace Aves.Config
       public bool Enabled { get; set; } = true;
 
       /// <summary>
-      /// Generally fills the other Attributes
+      /// Name; used for filling the other attributes
       /// </summary>
 #pragma warning disable S2376 // Write-only properties should not be used
       public string SetName

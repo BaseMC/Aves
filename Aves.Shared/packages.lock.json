@@ -4,9 +4,9 @@
     ".NETCoreApp,Version=v3.1": {
       "Litetex.CoreFrameworkBase": {
         "type": "Direct",
-        "requested": "[1.0.7385.37039, )",
-        "resolved": "1.0.7385.37039",
-        "contentHash": "OA54RP8bk9VgBZqNLwv2t0EXL08hKMjD6AzYLYEBywkqCn/HWDscScleuIH98WsS4BE0vISooX48uHKjB4T7bA==",
+        "requested": "[1.0.7388.35542, )",
+        "resolved": "1.0.7388.35542",
+        "contentHash": "I0HxjqfARFF2JAbJ/vwL8DPn4K24ORF9TOt9e0z8IZv+5cGP7GyWri8d+3Ul58nCuG294dyWF9Lty87AKuL8iA==",
         "dependencies": {
           "Newtonsoft.Json": "12.0.3",
           "Serilog": "2.9.0",
