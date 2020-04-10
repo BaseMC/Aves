@@ -12,12 +12,15 @@ Thank you 🙇‍♀ for wanting to create an issue in this repository. Before y
 If your issue is relevant to this repository, please delete this text and continue to create this issue. Thank you in advance.
 
 **The bug**
+
 Short description of the bug.
+
 ``
 Insert program output here - if any
 ``
 
 **How to Reproduce**
+
 Steps to reproduce the behavior:
 1. Enter '...'
 2. See error
