@@ -19,10 +19,7 @@ Get the [latest release](https://github.com/BaseMC/Aves/releases/latest)
 ## Why?
 This project is designed for people that want to quickly take a look at a part of the code and understand what is going on.
 
-This is very useful e.g.<br/>
-- for quickly inspecting new versions <br/>
-- if you find a bug and want to know what causes it <br/>
-- if you are just interested in how things work :smile:<br/>
+This is very useful e.g.<br/>- for quickly inspecting new versions <br/>- if you find a bug and want to know what causes it <br/>- if you are just interested in how things work :smile:<br/>
 No need to rely on someone else to release new mappings or versions.
 
 The generated code is not perfect, but it's readable and that's what it's meant for.
