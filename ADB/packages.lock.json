@@ -29,9 +29,9 @@
       },
       "Octokit": {
         "type": "Direct",
-        "requested": "[0.46.0, )",
-        "resolved": "0.46.0",
-        "contentHash": "wR/CJ31Kyf+lLau1iZPw/7Wcm/dWCl/Fe35yVUy33lmzIUoTgFTinHRt2oN/9LkPH9fWnhdURKfdCg642hh2ew=="
+        "requested": "[0.47.0, )",
+        "resolved": "0.47.0",
+        "contentHash": "q1TWsMEjxG7Eb7YFrXm3MWgSPsMvPKxrIF//tuUPd9i/SS/fG7PerKr088E8AOoAFcHqMqouSrW0iAg2WgskDA=="
       },
       "Microsoft.NETCore.Platforms": {
         "type": "Transitive",
