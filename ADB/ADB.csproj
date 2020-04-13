@@ -5,6 +5,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
 
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <!-- https://github.com/NuGet/Home/issues/7921#issuecomment-478152479 -->
+    <RestoreLockedMode>true</RestoreLockedMode>
+    <NoWarn>NU1603</NoWarn>
+    <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
 
     <!-- Emulate .NET Frameworks versioning behavior 'GenerateVersionFromPatternAndCurrentTime' (UTC based) -->
     <!-- https://github.com/dotnet/sdk/issues/8416#issuecomment-354095128 -->
