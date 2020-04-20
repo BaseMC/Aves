@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.7.82" />
-    <PackageReference Include="Litetex.CoreFrameworkBase" Version="1.0.7388.35542" />
+    <PackageReference Include="Litetex.CoreFrameworkBase" Version="1.0.7414.30512" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Octokit" Version="0.47.0" />
   </ItemGroup>
