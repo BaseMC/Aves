@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using CoreFrameworkBase.Crash;
 using System.Linq;
 using System.Reflection;
+using CoreFrameworkBase.Logging.Initalizer;
+using CoreFrameworkBase.Logging.Initalizer.Impl;
 
 namespace Aves
 {
@@ -26,7 +28,10 @@ namespace Aves
          try
          {
 
-            CrashDetector.Current.Init();
+            new CrashDetector()
+            {
+               LoggerInitializer = GetLoggerInitializer(true)
+            }.Init();
 #endif
          Parser.Default.ParseArguments<CmdOption>(args)
                   .WithParsed((opt) =>
@@ -37,7 +42,7 @@ namespace Aves
                         return;
                      }
 
-                     LoggerInitializer.Current.InitLogger(opt.LogToFile);
+                     CurrentLoggerInitializer.InitializeWith(GetLoggerInitializer(opt.LogToFile));
 
                      var starter = new StartUp(opt);
                      starter.Start();
@@ -54,7 +59,7 @@ namespace Aves
                        )
                         return;
 
-                     LoggerInitializer.Current.InitLogger();
+                     CurrentLoggerInitializer.InitializeWith(GetLoggerInitializer());
                      foreach (var error in ex)
                         Log.Error($"Failed to parse: {error.Tag}");
                   });
@@ -62,12 +67,13 @@ namespace Aves
          }
          catch (Exception ex)
          {
-
-            LoggerInitializer.Current.InitLogger(true);
+            CurrentLoggerInitializer.InitializeWith(GetLoggerInitializer(true));
             Log.Fatal(ex);
 
          }
 #endif
       }
+
+      static ILoggerInitializer GetLoggerInitializer(bool writeFile = false) => new DefaultLoggerInitializer() { WriteFile = writeFile };
    }
 }

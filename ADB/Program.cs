@@ -5,6 +5,8 @@ using CoreFrameworkBase.Logging;
 using System;
 using System.Reflection;
 using System.Linq;
+using CoreFrameworkBase.Logging.Initalizer;
+using CoreFrameworkBase.Logging.Initalizer.Impl;
 
 /// <summary>
 /// Aves Dependency Builder
@@ -19,7 +21,10 @@ namespace ADB
          try
          {
 
-            CrashDetector.Current.Init();
+            new CrashDetector()
+            {
+               LoggerInitializer = GetLoggerInitializer(true)
+            }.Init();
 #endif
             Parser.Default.ParseArguments<CmdOption>(args)
                      .WithParsed((opt) =>
@@ -30,7 +35,7 @@ namespace ADB
                            return;
                         }
 
-                        LoggerInitializer.Current.InitLogger(opt.LogToFile);
+                        CurrentLoggerInitializer.InitializeWith(GetLoggerInitializer(opt.LogToFile));
 
                         var starter = new StartUp(opt);
                         starter.Start();
@@ -47,7 +52,7 @@ namespace ADB
                         )
                            return;
 
-                        LoggerInitializer.Current.InitLogger();
+                        CurrentLoggerInitializer.InitializeWith(GetLoggerInitializer());
                         foreach (var error in ex)
                            Log.Error($"Failed to parse: {error.Tag}");
                      });
@@ -56,11 +61,13 @@ namespace ADB
          catch (Exception ex)
          {
 
-            LoggerInitializer.Current.InitLogger(true);
+            CurrentLoggerInitializer.InitializeWith(GetLoggerInitializer(true));
             Log.Fatal(ex);
 
          }
 #endif
       }
+
+      static ILoggerInitializer GetLoggerInitializer(bool writeFile = false) => new DefaultLoggerInitializer() { WriteFile = writeFile };
    }
 }
