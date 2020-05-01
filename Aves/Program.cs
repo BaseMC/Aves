@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using CoreFrameworkBase.Crash;
 using System.Linq;
 using System.Reflection;
+using CoreFrameworkBase.Logging.Initalizer;
+using CoreFrameworkBase.Logging.Initalizer.Impl;
 
 namespace Aves
 {
@@ -22,52 +24,62 @@ namespace Aves
 
       public static void Run(string[] args)
       {
+         CurrentLoggerInitializer.Set(new DefaultLoggerInitializer(new DefaultLoggerInitializerConfig()));
+
 #if !DEBUG
          try
          {
-
-            CrashDetector.Current.Init();
+            new CrashDetector()
+            {
+               SupplyLoggerInitalizer = () => {
+                  InitLog(li => li.Config.WriteFile = true);
+                  return CurrentLoggerInitializer.Current;
+               }
+            }.Init();
 #endif
-         Parser.Default.ParseArguments<CmdOption>(args)
-                  .WithParsed((opt) =>
-                  {
-                     if (opt.ShowVersion)
+            Parser.Default.ParseArguments<CmdOption>(args)
+                     .WithParsed((opt) =>
                      {
-                        Console.WriteLine($"{Assembly.GetExecutingAssembly().GetName().Name} {Assembly.GetExecutingAssembly().GetName().Version}");
-                        return;
-                     }
+                        if (opt.ShowVersion)
+                        {
+                           Console.WriteLine($"{Assembly.GetExecutingAssembly().GetName().Name} {Assembly.GetExecutingAssembly().GetName().Version}");
+                           return;
+                        }
 
-                     LoggerInitializer.Current.InitLogger(opt.LogToFile);
+                        InitLog(li => li.Config.WriteFile = opt.LogToFile);
 
-                     var starter = new StartUp(opt);
-                     starter.Start();
-                  })
-                  .WithNotParsed((ex) =>
-                  {
-                     if (ex.All(err =>
-                             new ErrorType[]
-                             {
+                        var starter = new StartUp(opt);
+                        starter.Start();
+                     })
+                     .WithNotParsed((ex) =>
+                     {
+                        if (ex.All(err =>
+                                new ErrorType[]
+                                {
                                  ErrorType.HelpRequestedError,
                                  ErrorType.HelpVerbRequestedError,
                                  ErrorType.VersionRequestedError
-                             }.Contains(err.Tag))
-                       )
-                        return;
+                                }.Contains(err.Tag))
+                          )
+                           return;
 
-                     LoggerInitializer.Current.InitLogger();
-                     foreach (var error in ex)
-                        Log.Error($"Failed to parse: {error.Tag}");
-                  });
+                        InitLog();
+                        foreach (var error in ex)
+                           Log.Error($"Failed to parse: {error.Tag}");
+                     });
 #if !DEBUG
          }
          catch (Exception ex)
          {
-
-            LoggerInitializer.Current.InitLogger(true);
+            InitLog(li => li.Config.WriteFile = true);
             Log.Fatal(ex);
-
          }
 #endif
+      }
+
+      static void InitLog(Action<DefaultLoggerInitializer> initAction = null)
+      {
+         CurrentLoggerInitializer.InitLogging(il => initAction?.Invoke((DefaultLoggerInitializer)il));
       }
    }
 }

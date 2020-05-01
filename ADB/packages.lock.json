@@ -10,9 +10,9 @@
       },
       "Litetex.CoreFrameworkBase": {
         "type": "Direct",
-        "requested": "[1.0.7388.35542, )",
-        "resolved": "1.0.7388.35542",
-        "contentHash": "I0HxjqfARFF2JAbJ/vwL8DPn4K24ORF9TOt9e0z8IZv+5cGP7GyWri8d+3Ul58nCuG294dyWF9Lty87AKuL8iA==",
+        "requested": "[1.0.7426.26100, )",
+        "resolved": "1.0.7426.26100",
+        "contentHash": "+OCbJIeLc7fkFUq0Lg/20XiviaWyZqAooO7zsFjG4SR+ToOqABht8uURbbs6tHkghc/plpjjw6UxWvBlGheRWA==",
         "dependencies": {
           "Newtonsoft.Json": "12.0.3",
           "Serilog": "2.9.0",
@@ -288,7 +288,7 @@
       "aves.shared": {
         "type": "Project",
         "dependencies": {
-          "Litetex.CoreFrameworkBase": "1.0.7388.35542"
+          "Litetex.CoreFrameworkBase": "1.0.7426.26100"
         }
       }
     }
