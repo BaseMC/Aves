@@ -19,7 +19,7 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 3.1.102
+          dotnet-version: 3.1.201
       
       - name: Build - Dotnet Build Release
         run: dotnet build --configuration Release
@@ -98,7 +98,7 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 3.1.102
+          dotnet-version: 3.1.201
               
       - name: Publish ${{ matrix.os }} ${{ matrix.configuration }} - Dotnet Publish 
         working-directory: Aves
