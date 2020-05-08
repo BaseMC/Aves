@@ -14,14 +14,14 @@ namespace Aves.Config
       public bool ResolveOverNetwork { get; set; } = true;
 
       /// <summary>
-      /// Remote URL to download the Mainfest (all existing versions and their remotes)
+      /// Remote URL to download the mainfest (includes all existing versions and the version foreach remote)
       /// </summary>
       public string RemoteManifestJsonURL { get; set; } = "https://launchermeta.mojang.com/mc/game/version_manifest.json";
 
       /// <summary>
       /// Suppresses the download from the <see cref="RemoteManifestJsonURL"/>,
       /// if the <see cref="ManifestJsonFilePath"/> exists and 
-      /// the file is not older the given amount
+      /// the file is not older the given duration
       /// </summary>
       public TimeSpan SuppressManifestDownload { get; set; } = TimeSpan.FromMinutes(5);
 
@@ -41,7 +41,7 @@ namespace Aves.Config
       public bool NetworkIncludeClientLibs { get; set; } = false;
 
       /// <summary>
-      /// Download Logger Config
+      /// Download Logger Config into <see cref="Configuration.OutputDirLogging"/>
       /// </summary>
       public bool NetworkIncludeLogging { get; set; } = false;
 
@@ -86,7 +86,7 @@ namespace Aves.Config
       public string JavaExePath { get; set; } = Path.Combine("jre", "bin", "java.exe");
 
       /// <summary>
-      /// Deobfuscator; if not absloute: relative to <see cref="AppDomain.CurrentDomain.BaseDirectory"/>
+      /// Deobfuscator; if not absloute: relative to <see cref="System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName"/>
       /// </summary>
       public string Deobfuscator { get; set; } = "javgent-standalone.jar";
 
@@ -101,7 +101,7 @@ namespace Aves.Config
       public string BaseDeobfuscatorCommand { get; set; } = "-jar \"{Deobfuscator}\" -s \"{SrcJar}\" -m \"{PatchFile}\" -o \"{DeObfuscatedFile}\"";
 
       /// <summary>
-      /// Decompiler; if not absloute: relative to <see cref="AppDomain.CurrentDomain.BaseDirectory"/>
+      /// Decompiler; if not absloute: relative to <see cref="System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName"/>
       /// </summary>
       public string Decompiler { get; set; } = "avesflower.jar";
 
@@ -126,7 +126,7 @@ namespace Aves.Config
       ///  </item>
       /// </list>
       /// </remarks>
-      /// <seealso cref="https://github.com/BaseMC/fernflower"/>
+      /// <seealso cref="https://github.com/BaseMC/avesflower"/>
       public string BaseDecompileCommand { get; set; } = "-jar \"{Decompiler}\" -dgs=1 -rsy=1 -lit=1 -mpm=60 \"{SrcFile}\" \"{TargetDir}\"";
 
 #region Workdir

@@ -4,15 +4,15 @@
     ".NETCoreApp,Version=v3.1": {
       "CommandLineParser": {
         "type": "Direct",
-        "requested": "[2.7.82, )",
-        "resolved": "2.7.82",
-        "contentHash": "JnjxBu4++EDnYtDzHskiPrPJ9hAna8amu8qlQx8J+2oZnPddDnkR/0FFtQMDz0Cs0YF2lbyW3OmYfRmIrLNY0A=="
+        "requested": "[2.8.0, )",
+        "resolved": "2.8.0",
+        "contentHash": "eco2HlKQBY4Joz9odHigzGpVzv6pjsXnY5lziioMveQxr+i2Z7xYcIOMeZTgYiqnMtMAbXMXsVhrNfWO5vJS8Q=="
       },
       "Litetex.CoreFrameworkBase": {
         "type": "Direct",
-        "requested": "[1.0.7385.37039, )",
-        "resolved": "1.0.7385.37039",
-        "contentHash": "OA54RP8bk9VgBZqNLwv2t0EXL08hKMjD6AzYLYEBywkqCn/HWDscScleuIH98WsS4BE0vISooX48uHKjB4T7bA==",
+        "requested": "[1.0.7426.26100, )",
+        "resolved": "1.0.7426.26100",
+        "contentHash": "+OCbJIeLc7fkFUq0Lg/20XiviaWyZqAooO7zsFjG4SR+ToOqABht8uURbbs6tHkghc/plpjjw6UxWvBlGheRWA==",
         "dependencies": {
           "Newtonsoft.Json": "12.0.3",
           "Serilog": "2.9.0",
@@ -282,7 +282,7 @@
       "aves.shared": {
         "type": "Project",
         "dependencies": {
-          "Litetex.CoreFrameworkBase": "1.0.7385.37039"
+          "Litetex.CoreFrameworkBase": "1.0.7426.26100"
         }
       }
     }

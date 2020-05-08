@@ -34,7 +34,7 @@ namespace Aves.Download
       /// <returns>true = downloaed</returns>
       protected bool DownloadMainfest(bool forceDownload = false)
       {
-         if (!File.Exists(Config.ManifestJsonFilePath) || Config.SuppressManifestDownload.TotalMilliseconds == 0 || forceDownload)
+         if (!File.Exists(Config.ManifestJsonFilePath) || Config.SuppressManifestDownload.TotalMilliseconds <= 0 || forceDownload)
          {
             Downloader.Download(Config.RemoteManifestJsonURL, Config.ManifestJsonFilePath);
             return true;
@@ -43,6 +43,13 @@ namespace Aves.Download
          Log.Info($"{nameof(Config.SuppressManifestDownload)}={Config.SuppressManifestDownload}");
 
          var fileInfo = new FileInfo(Config.ManifestJsonFilePath);
+
+         if(fileInfo.LastAccessTimeUtc > DateTime.UtcNow)
+         {
+            Log.Warn($"File was written in the future: {fileInfo.LastAccessTimeUtc}");
+            Downloader.Download(Config.RemoteManifestJsonURL, Config.ManifestJsonFilePath);
+            return true;
+         }
 
          var timespanLastWriteTimeToNow = DateTime.UtcNow - fileInfo.LastWriteTimeUtc;
 
