@@ -4,9 +4,9 @@
     ".NETCoreApp,Version=v3.1": {
       "CommandLineParser": {
         "type": "Direct",
-        "requested": "[2.8.0, )",
-        "resolved": "2.8.0",
-        "contentHash": "eco2HlKQBY4Joz9odHigzGpVzv6pjsXnY5lziioMveQxr+i2Z7xYcIOMeZTgYiqnMtMAbXMXsVhrNfWO5vJS8Q=="
+        "requested": "[2.7.82, )",
+        "resolved": "2.7.82",
+        "contentHash": "JnjxBu4++EDnYtDzHskiPrPJ9hAna8amu8qlQx8J+2oZnPddDnkR/0FFtQMDz0Cs0YF2lbyW3OmYfRmIrLNY0A=="
       },
       "Litetex.CoreFrameworkBase": {
         "type": "Direct",
