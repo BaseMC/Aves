@@ -15,7 +15,8 @@
 
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.8.0" />
-    <PackageReference Include="Litetex.CoreFrameworkBase" Version="1.0.7426.26100" />
+    <PackageReference Include="Litetex.CoreFramework.Config.Json" Version="2020.5.21.183627" />
+    <PackageReference Include="Litetex.CoreFramework.CrashLogging" Version="2020.5.21.183627" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Octokit" Version="0.47.0" />
   </ItemGroup>

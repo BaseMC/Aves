@@ -1,12 +1,11 @@
 ﻿using ADB.CMD;
 using CommandLine;
-using CoreFrameworkBase.Crash;
-using CoreFrameworkBase.Logging;
 using System;
 using System.Reflection;
 using System.Linq;
-using CoreFrameworkBase.Logging.Initalizer;
-using CoreFrameworkBase.Logging.Initalizer.Impl;
+using CoreFramework.CrashLogging;
+using CoreFramework.Logging.Initalizer;
+using CoreFramework.Logging.Initalizer.Impl;
 
 /// <summary>
 /// Aves Dependency Builder

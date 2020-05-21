@@ -2,18 +2,23 @@
   "version": 1,
   "dependencies": {
     ".NETCoreApp,Version=v3.1": {
-      "Litetex.CoreFrameworkBase": {
+      "Litetex.CoreFramework.Logging": {
         "type": "Direct",
-        "requested": "[1.0.7426.26100, )",
-        "resolved": "1.0.7426.26100",
-        "contentHash": "+OCbJIeLc7fkFUq0Lg/20XiviaWyZqAooO7zsFjG4SR+ToOqABht8uURbbs6tHkghc/plpjjw6UxWvBlGheRWA==",
+        "requested": "[2020.5.21.183627, )",
+        "resolved": "2020.5.21.183627",
+        "contentHash": "ZEDMWqD6UC/gzoC5izissFouoQwcDJ8bKx9jDyUPSMkaFowtvQCCXN3AjEBx0cPom0HDu+pgw08/n2YJdO6RJg==",
         "dependencies": {
-          "Newtonsoft.Json": "12.0.3",
+          "Litetex.CoreFramework.Base": "2020.5.21.183627",
           "Serilog": "2.9.0",
           "Serilog.Enrichers.Thread": "3.1.0",
           "Serilog.Sinks.Console": "3.1.1",
           "Serilog.Sinks.File": "4.1.0"
         }
+      },
+      "Litetex.CoreFramework.Base": {
+        "type": "Transitive",
+        "resolved": "2020.5.21.183627",
+        "contentHash": "OSZoVPh02Fa0xMC13lGeot/oS0l63xLDmHqk4GcQDu4qAv3Ivmcn1+lyNFLSaPJ6z4kZE4iOgQkPvOmiOrgoXA=="
       },
       "Microsoft.NETCore.Platforms": {
         "type": "Transitive",
@@ -24,11 +29,6 @@
         "type": "Transitive",
         "resolved": "1.1.0",
         "contentHash": "aOZA3BWfz9RXjpzt0sRJJMjAscAUm3Hoa4UWAfceV9UTYxgwZ1lZt5nO2myFf+/jetYQo4uTP7zS8sJY67BBxg=="
-      },
-      "Newtonsoft.Json": {
-        "type": "Transitive",
-        "resolved": "12.0.3",
-        "contentHash": "6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg=="
       },
       "runtime.native.System": {
         "type": "Transitive",

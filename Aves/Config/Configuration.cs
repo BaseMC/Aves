@@ -1,4 +1,4 @@
-﻿using CoreFrameworkBase.Config;
+﻿using CoreFramework.Config;
 using System;
 using System.Collections.Generic;
 using System.IO;

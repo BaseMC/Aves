@@ -6,7 +6,7 @@ using System.Diagnostics.Contracts;
 using System.IO;
 using System.Text;
 using System.Linq;
-using static CoreFrameworkBase.Config.JsonConfig;
+using CoreFramework.Config;
 
 namespace Aves
 {

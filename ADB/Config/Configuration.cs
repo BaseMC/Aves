@@ -1,10 +1,10 @@
 ﻿using ADB.Config.Github;
 using ADB.Config.Java;
-using CoreFrameworkBase.Config;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using CoreFramework.Config;
 
 namespace ADB.Config
 {

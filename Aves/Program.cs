@@ -1,14 +1,13 @@
 ﻿using CommandLine;
-using CoreFrameworkBase.Logging;
 using Aves.CMD;
 using Aves.Config;
 using System;
 using System.Collections.Generic;
-using CoreFrameworkBase.Crash;
 using System.Linq;
 using System.Reflection;
-using CoreFrameworkBase.Logging.Initalizer;
-using CoreFrameworkBase.Logging.Initalizer.Impl;
+using CoreFramework.Logging.Initalizer;
+using CoreFramework.CrashLogging;
+using CoreFramework.Logging.Initalizer.Impl;
 
 namespace Aves
 {
