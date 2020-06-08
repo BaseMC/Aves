@@ -20,8 +20,8 @@
 
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.8.0" />
-    <PackageReference Include="Litetex.CoreFramework.Config.Json" Version="2020.5.21.183627" />
-    <PackageReference Include="Litetex.CoreFramework.CrashLogging" Version="2020.5.21.183627" />
+    <PackageReference Include="Litetex.CoreFramework.Config.Json" Version="2020.6.5.2106" />
+    <PackageReference Include="Litetex.CoreFramework.CrashLogging" Version="2020.6.5.2106" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 

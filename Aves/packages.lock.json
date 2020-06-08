@@ -10,21 +10,21 @@
       },
       "Litetex.CoreFramework.Config.Json": {
         "type": "Direct",
-        "requested": "[2020.5.21.183627, )",
-        "resolved": "2020.5.21.183627",
-        "contentHash": "9fDcq5iCMXp6s6Ot3sVrYbKaI3kYH4C3XvQ9YLBSwe5tivNywnosyYO+1gE0G+z4cNT+TkkqqUOe8AZR8YclaA==",
+        "requested": "[2020.6.5.2106, )",
+        "resolved": "2020.6.5.2106",
+        "contentHash": "ZsTOruZKMaHt17ijF3WrmjrsQQKCt5uYTSFgzjjgQ27BEypUfqmZ7sUnccRfzsUYs0gHVF+QUJ2fR1eGXVkTOw==",
         "dependencies": {
-          "Litetex.CoreFramework.Config": "2020.5.21.183627",
+          "Litetex.CoreFramework.Config": "2020.6.5.2106",
           "Newtonsoft.Json": "12.0.3"
         }
       },
       "Litetex.CoreFramework.CrashLogging": {
         "type": "Direct",
-        "requested": "[2020.5.21.183627, )",
-        "resolved": "2020.5.21.183627",
-        "contentHash": "A6d26Pd/vyMSvYXLI1sPV2a6esVt1ENOXqAKttPB9IAjW5rqxu4N7YbAgfYCm25f+v1Wd75dL31sZ0Tq9dkQ8A==",
+        "requested": "[2020.6.5.2106, )",
+        "resolved": "2020.6.5.2106",
+        "contentHash": "RiOkfQAosCeY1jsl85uzuWYfKE7lnGz+m704TJNox3c1+4nNwoLyarRO5zQ44rqwzqPKYW+9PvJcOMyvvNRPIw==",
         "dependencies": {
-          "Litetex.CoreFramework.Logging": "2020.5.21.183627"
+          "Litetex.CoreFramework.Logging": "2020.6.5.2106"
         }
       },
       "Newtonsoft.Json": {
@@ -35,23 +35,23 @@
       },
       "Litetex.CoreFramework.Base": {
         "type": "Transitive",
-        "resolved": "2020.5.21.183627",
-        "contentHash": "OSZoVPh02Fa0xMC13lGeot/oS0l63xLDmHqk4GcQDu4qAv3Ivmcn1+lyNFLSaPJ6z4kZE4iOgQkPvOmiOrgoXA=="
+        "resolved": "2020.6.5.2106",
+        "contentHash": "9dk9kr+ujVgxZQQzJeNboqM1xTHPHjsQ0tRFQQmiBO7suScQzhwDo5P958I31vPTtnoAp9RlFVU16UT2KaWNiA=="
       },
       "Litetex.CoreFramework.Config": {
         "type": "Transitive",
-        "resolved": "2020.5.21.183627",
-        "contentHash": "brJokuJykRJNPHkUZOsLVDQkcvxMMedR48kZHxMzCu6i3egVk2Lyrl2T/YqO7vnp13I2KjTz2qV4zSlngJa/Ag==",
+        "resolved": "2020.6.5.2106",
+        "contentHash": "jAv7QfH7u+xcXsTpWsPw/E27+ziteDsSHFwiayKeUpjsdeE3GdadWuXWsZ8361rWZON6ZfxCaKb6YJAAonXP0Q==",
         "dependencies": {
-          "Litetex.CoreFramework.Base": "2020.5.21.183627"
+          "Litetex.CoreFramework.Base": "2020.6.5.2106"
         }
       },
       "Litetex.CoreFramework.Logging": {
         "type": "Transitive",
-        "resolved": "2020.5.21.183627",
-        "contentHash": "ZEDMWqD6UC/gzoC5izissFouoQwcDJ8bKx9jDyUPSMkaFowtvQCCXN3AjEBx0cPom0HDu+pgw08/n2YJdO6RJg==",
+        "resolved": "2020.6.5.2106",
+        "contentHash": "fyvLdsjB+UmjnbOCe3UHff99J2LAz1gg8s+D2E390uLyxTCTN6UT0Ljxr5FKNo2HkoGa9GXNmzHwj1XaqqfohQ==",
         "dependencies": {
-          "Litetex.CoreFramework.Base": "2020.5.21.183627",
+          "Litetex.CoreFramework.Base": "2020.6.5.2106",
           "Serilog": "2.9.0",
           "Serilog.Enrichers.Thread": "3.1.0",
           "Serilog.Sinks.Console": "3.1.1",
@@ -313,7 +313,7 @@
       "aves.shared": {
         "type": "Project",
         "dependencies": {
-          "Litetex.CoreFramework.Logging": "2020.5.21.183627"
+          "Litetex.CoreFramework.Logging": "2020.6.5.2106"
         }
       }
     }
