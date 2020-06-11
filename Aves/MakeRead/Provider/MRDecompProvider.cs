@@ -37,7 +37,7 @@ namespace Aves.MakeRead.Provider
          var parent = Directory.GetParent(variant.DecompiledFile).ToString();
          DirUtil.EnsureCreatedAndClean(parent);
 
-         var formattedBaseCommand = config.BaseDecompileCommand
+         var formattedBaseCommand = config.BaseDecompilerCommand
             .Replace("{Decompiler}", config.Decompiler)
             .Replace("{SrcFile}", variant.DeObfuscatedFile)
             .Replace("{TargetDir}", parent);

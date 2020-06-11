@@ -143,7 +143,7 @@ auto-generated file:
   "BaseDeobfuscatorCommand": "-jar \"{Deobfuscator}\" -s \"{SrcJar}\" -m \"{PatchFile}\" -o \"{DeObfuscatedFile}\"",
   "Decompiler": null,
   "DecompilerTimeout": "00:30:00",
-  "BaseDecompileCommand": "-jar \"{Decompiler}\" -dgs=1 -rsy=1 -lit=1 -mpm=60 \"{SrcFile}\" \"{TargetDir}\"",
+  "BaseDecompilerCommand": "-jar \"{Decompiler}\" -dgs=1 -rsy=1 -lit=1 -mpm=60 \"{SrcFile}\" \"{TargetDir}\"",
   "WorkingDirectory": "workingDir",
   "VersionWorkingDirectory": null,
   "RawDirectory": "raw",

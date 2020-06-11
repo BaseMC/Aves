@@ -127,7 +127,7 @@ namespace Aves.Config
       /// </list>
       /// </remarks>
       /// <seealso cref="https://github.com/BaseMC/avesflower"/>
-      public string BaseDecompileCommand { get; set; } = "-jar \"{Decompiler}\" -dgs=1 -rsy=1 -lit=1 -mpm=60 \"{SrcFile}\" \"{TargetDir}\"";
+      public string BaseDecompilerCommand { get; set; } = "-jar \"{Decompiler}\" -dgs=1 -rsy=1 -lit=1 -mpm=60 \"{SrcFile}\" \"{TargetDir}\"";
 
 #region Workdir
 
