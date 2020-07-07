@@ -14,6 +14,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Litetex.CoreFramework.Logging" Version="2020.6.5.2106" />
+    <PackageReference Include="Litetex.CoreFramework.Logging" Version="2020.7.7.1732" />
   </ItemGroup>
 </Project>

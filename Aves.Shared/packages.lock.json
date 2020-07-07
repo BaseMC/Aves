@@ -4,11 +4,11 @@
     ".NETCoreApp,Version=v3.1": {
       "Litetex.CoreFramework.Logging": {
         "type": "Direct",
-        "requested": "[2020.6.5.2106, )",
-        "resolved": "2020.6.5.2106",
-        "contentHash": "fyvLdsjB+UmjnbOCe3UHff99J2LAz1gg8s+D2E390uLyxTCTN6UT0Ljxr5FKNo2HkoGa9GXNmzHwj1XaqqfohQ==",
+        "requested": "[2020.7.7.1732, )",
+        "resolved": "2020.7.7.1732",
+        "contentHash": "EKN6RvtshC+cEvci2y+uEl1n20t6CyoauVk6lIy8Qr4eYQcGnkekMj0anxMI/CKigAkuWlIGKF9SH5+5FAobbA==",
         "dependencies": {
-          "Litetex.CoreFramework.Base": "2020.6.5.2106",
+          "Litetex.CoreFramework.Base": "2020.7.7.1732",
           "Serilog": "2.9.0",
           "Serilog.Enrichers.Thread": "3.1.0",
           "Serilog.Sinks.Console": "3.1.1",
@@ -17,8 +17,8 @@
       },
       "Litetex.CoreFramework.Base": {
         "type": "Transitive",
-        "resolved": "2020.6.5.2106",
-        "contentHash": "9dk9kr+ujVgxZQQzJeNboqM1xTHPHjsQ0tRFQQmiBO7suScQzhwDo5P958I31vPTtnoAp9RlFVU16UT2KaWNiA=="
+        "resolved": "2020.7.7.1732",
+        "contentHash": "JbX70txnTJ2kSpSVr//MGjlm5nmdYN1pYMIfg7mcEbIYaLsSaZCGvBEIygPaoduMMEklhvFeCM5sQvvaniYeNw=="
       },
       "Microsoft.NETCore.Platforms": {
         "type": "Transitive",
