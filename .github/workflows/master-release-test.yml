@@ -1,12 +1,8 @@
-name: Test CI
+name: Release Test CI
 
 on: 
   push:
-    branches: 
-      - master-release-test
-
-# Don't use a cache here: 
-#  This is the last instance that can detect missing dependecies
+    branches: [ master-release-test ]
 
 jobs:
   build_release:
@@ -38,15 +34,11 @@ jobs:
         run: zip -r ADB.zip . -x \*.pdb
         
       - name: Upload ADB - Upload Artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         with:
           name: ADB
           path: ADB/bin/Release/netcoreapp3.1/publish/ADB.zip
-        
-                      
-     # - name: Move build tool to build folder - ADB
-      #  run: cp ADB/bin/Release/netcoreapp3.1/publish/* build
-      
+
       - name: Release - Create Draft for Release
         id: create_draft
         uses: release-drafter/release-drafter@v5
@@ -59,19 +51,20 @@ jobs:
           echo '${{ steps.create_draft.outputs.upload_url }}' > asset_upload_url.txt
         
       - name: Upload Asset Upload URL - Upload Artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         with:
           name: asset_upload_url
           path: asset_upload_url.txt
 
   build_release_variants:
-    name: Variants
+    name: Variant
     runs-on: ubuntu-latest
     needs: [build_release]
     strategy:
       matrix:
         os: [win-x64, linux-x64, osx-x64]
         configuration: [Release]
+        project: [Aves]
     
     steps:
       - uses: actions/checkout@v2
@@ -100,8 +93,8 @@ jobs:
         with:
           dotnet-version: 3.1
               
-      - name: Publish ${{ matrix.os }} ${{ matrix.configuration }} - Dotnet Publish 
-        working-directory: Aves
+      - name: Publish ${{ matrix.os }} ${{ matrix.configuration }} - dotnet publish 
+        working-directory: ${{ matrix.project }}
         run: dotnet publish -c ${{ matrix.configuration }} -r ${{ matrix.os }} /p:PublishSingleFile=true
                 
       - name: Download dependencies of ${{ matrix.os }} - ADB
@@ -113,16 +106,15 @@ jobs:
         
         #Ignore pdb files
       - name: Pack ${{ matrix.os }} - Zip
-        working-directory: Aves/bin/${{ matrix.configuration }}/netcoreapp3.1/${{ matrix.os }}/publish/
-        run: zip -r Aves.zip . -x \*.pdb
+        working-directory: ${{ matrix.project }}/bin/${{ matrix.configuration }}/netcoreapp3.1/${{ matrix.os }}/publish/
+        run: zip -r ${{ matrix.project }}.zip . -x \*.pdb
         
-      - name: Release win-x64 - Upload Release Asset
-        uses: actions/upload-release-asset@v1.0.2
+      - name: Release ${{ matrix.os }} - Upload Release Asset
+        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_draft.outputs.upload_url }} 
-          asset_path: ./Aves/bin/${{ matrix.configuration }}/netcoreapp3.1/${{ matrix.os }}/publish/Aves.zip
-          asset_name: Aves-${{ matrix.os }}.zip
+          asset_path: ./${{ matrix.project }}/bin/${{ matrix.configuration }}/netcoreapp3.1/${{ matrix.os }}/publish/${{ matrix.project }}.zip
+          asset_name: ${{ matrix.project }}-${{ matrix.os }}.zip
           asset_content_type: application/zip
-  
