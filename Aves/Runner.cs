@@ -39,8 +39,8 @@ namespace Aves
          if (string.IsNullOrWhiteSpace(Config.Deobfuscator))
             throw new ArgumentException($"{nameof(Config.Deobfuscator)}[='{Config.Deobfuscator}'] is invalid");
 
-         if (string.IsNullOrWhiteSpace(Config.BaseDecompileCommand))
-            throw new ArgumentException($"{nameof(Config.BaseDecompileCommand)}[='{Config.BaseDecompileCommand}'] is invalid");
+         if (string.IsNullOrWhiteSpace(Config.BaseDecompilerCommand))
+            throw new ArgumentException($"{nameof(Config.BaseDecompilerCommand)}[='{Config.BaseDecompilerCommand}'] is invalid");
 
          if (string.IsNullOrWhiteSpace(Config.Decompiler))
             throw new ArgumentException($"{nameof(Config.Decompiler)}[='{Config.Decompiler}'] is invalid");
