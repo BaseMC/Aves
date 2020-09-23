@@ -72,7 +72,7 @@ Description: Creates source code for 1.14.4 (by default: client only)
 |Argument|Meaning|Example|
 |--------|-------|-------|
 |``-l`` ``--logfile``|logs additionally to a logfile<br/> generated under ``logs`` |``-l``|
-|``--version``| Shows the current Aves version and does nothing else |``-version``<br/>Example output: ``Aves 1.0.7364.40087``<br/> Format:  ``<Name> <MainVersion>.<SubVersion>.<DaysSince2000>.<SecondsSinceMidnight/2>`` → [see also](https://stackoverflow.com/questions/356543/can-i-automatically-increment-the-file-build-version-when-using-visual-studio) |
+|``--version``| Shows the current Aves version and does nothing else |``--version``<br/>Example output: ``Aves 1.0.7364.40087``<br/> Format:  ``<Name> <MainVersion>.<SubVersion>.<DaysSince2000>.<SecondsSinceMidnight/2>`` → [see also](https://stackoverflow.com/questions/356543/can-i-automatically-increment-the-file-build-version-when-using-visual-studio) |
 |``--genconf <value>``|only generates a json-Config file<br/> value = JSON-Config file to generate | ``--genconf config.json`` |
 |``-c <value>`` ``--conf <value>``|load a json-Config file<br/> value = JSON-Config file (see below) |``-c config.json`` (uses a file called config.json for configuration)|
 |``-v`` ``--mcversion``|Required (if using no json file for configuration)<br /> Version that should be downloaded|``-v "1.14.4"`` (generates files for 1.14.4)|
