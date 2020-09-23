@@ -75,7 +75,7 @@ Description: Creates source code for 1.14.4 (by default: client only)
 |``--version``| Shows the current Aves version and does nothing else |``--version``<br/>Example output: ``Aves 1.0.7364.40087``<br/> Format:  ``<Name> <MainVersion>.<SubVersion>.<DaysSince2000>.<SecondsSinceMidnight/2>`` → [see also](https://stackoverflow.com/questions/356543/can-i-automatically-increment-the-file-build-version-when-using-visual-studio) |
 |``--genconf <value>``|only generates a json-Config file<br/> value = JSON-Config file to generate | ``--genconf config.json`` |
 |``-c <value>`` ``--conf <value>``|load a json-Config file<br/> value = JSON-Config file (see below) |``-c config.json`` (uses a file called config.json for configuration)|
-|``-v`` ``--mcversion``|Required (if using no json file for configuration)<br /> Version that should be downloaded|``-v "1.14.4"`` (generates files for 1.14.4)|
+|``-v`` ``--mcversion``|Required (if using no json file for configuration)<br /> Version that should be downloaded|``-v "1.14.4"`` (generates files for 1.14.4)<br/>``-v LATEST`` (generates files for latest version)|
 |``-j`` ``--java``|Path to ``java.exe`` (Java11+)<br/><i>default:</i> path to included ``jre``<br/><i>experimental:</i><br/>If not set, will be automatically searched in either the Environment-Variable ``%JAVA_HOME%``(Windows) / ``$JAVA_HOME``(Linux/Mac) or over the command ``where java`` (Windows, Linux, Mac) | ``-j "C:\Program Files\Java\openjdk-11.0.2\bin\java.exe"`` |
 |``-p`` ``--profiles``|Given profiles/variants, that should be used<br/>Overrides the ``Enabled``-property in the json |``-p client server`` ``-p client``|
 
