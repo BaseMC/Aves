@@ -62,7 +62,7 @@ jobs:
       - uses: actions/checkout@v2
           
       - name: Download ADB - Download Artifact
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v2.0.5
         with:
           name: ADB
           path: temp_artf/ADB
