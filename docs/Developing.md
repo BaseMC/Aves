@@ -17,3 +17,7 @@ Aves requires some external files, e.g. a [JVM](https://adoptopenjdk.net/), a [d
 #### :warning: Notes
 * The files are usually kept until a (forced) rebuild is carried out 
 * You should update this files regularly
+
+
+## Related
+* [Building](Building.md)
