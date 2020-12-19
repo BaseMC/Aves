@@ -21,25 +21,26 @@ jobs:
       
       - name: Build - Dotnet Build Release
         run: dotnet build --configuration Release
+        working-directory: src
         
         #Build and prepare build tool
       - name: Publish build tool - ADB
-        working-directory: ADB
+        working-directory: src/ADB
         run: dotnet publish -c Release
       
       - name: Self test build tool - ADB
-        working-directory: ADB/bin/Release/netcoreapp3.1/publish
+        working-directory: src/ADB/bin/Release/netcoreapp3.1/publish
         run: ./ADB --version
       
       - name: Pack ADB - ADB
-        working-directory: ADB/bin/Release/netcoreapp3.1/publish
+        working-directory: src/ADB/bin/Release/netcoreapp3.1/publish
         run: zip -r ADB.zip . -x \*.pdb
         
       - name: Upload ADB - Upload Artifact
         uses: actions/upload-artifact@v2
         with:
           name: ADB
-          path: ADB/bin/Release/netcoreapp3.1/publish/ADB.zip
+          path: src/ADB/bin/Release/netcoreapp3.1/publish/ADB.zip
 
       - name: Release - Create Draft for Release
         id: create_draft
@@ -75,7 +76,7 @@ jobs:
           dotnet-version: 3.1
               
       - name: Publish ${{ matrix.os }} ${{ matrix.configuration }} - dotnet publish 
-        working-directory: ${{ matrix.project }}
+        working-directory: src/${{ matrix.project }}
         run: dotnet publish -c ${{ matrix.configuration }} -r ${{ matrix.os }} /p:PublishSingleFile=true
                 
       - name: Download dependencies of ${{ matrix.os }} - ADB
@@ -87,7 +88,7 @@ jobs:
         
         #Ignore pdb files
       - name: Pack ${{ matrix.os }} - Zip
-        working-directory: ${{ matrix.project }}/bin/${{ matrix.configuration }}/netcoreapp3.1/${{ matrix.os }}/publish/
+        working-directory: src/${{ matrix.project }}/bin/${{ matrix.configuration }}/netcoreapp3.1/${{ matrix.os }}/publish/
         run: zip -r ${{ matrix.project }}.zip . -x \*.pdb
         
       - name: Release ${{ matrix.os }} - Upload Release Asset
@@ -96,7 +97,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.build_release.outputs.upload_url }} 
-          asset_path: ./${{ matrix.project }}/bin/${{ matrix.configuration }}/netcoreapp3.1/${{ matrix.os }}/publish/${{ matrix.project }}.zip
+          asset_path: ./src/${{ matrix.project }}/bin/${{ matrix.configuration }}/netcoreapp3.1/${{ matrix.os }}/publish/${{ matrix.project }}.zip
           asset_name: ${{ matrix.project }}-${{ matrix.os }}.zip
           asset_content_type: application/zip
   
