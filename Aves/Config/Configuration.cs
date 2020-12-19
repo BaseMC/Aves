@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Aves.Config
@@ -76,14 +77,14 @@ namespace Aves.Config
       /// <summary>
       /// Java Installation Dir
       /// <para/>
-      /// if not set autodetect; default is provided JRE under jre/bin/java.exe
+      /// if not set autodetect; default is provided JRE under jre/bin/java.exe (win) or jre/bin/java (linux)
       /// <para/>
       /// if not absloute: relative to <see cref="AppDomain.CurrentDomain.BaseDirectory"/>
       /// </summary>
       /// <example>
       /// "C:\Program Files\Java\jre1.11.0_XXX\bin\java.exe"
       /// </example>
-      public string JavaExePath { get; set; } = Path.Combine("jre", "bin", "java.exe");
+      public string JavaExePath { get; set; } = Path.Combine("jre", "bin", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "java.exe" : "java");
 
       /// <summary>
       /// Deobfuscator; if not absloute: relative to <see cref="System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName"/>

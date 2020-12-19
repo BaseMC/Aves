@@ -186,7 +186,10 @@ namespace Aves
 
       private string TryFindJavaExe()
       {
+         Log.Info("Looking up Java...");
+
          string javaExePath = BuildPathForExecutableLocation(nameof(Config.JavaExePath), Config.JavaExePath);
+         Log.Info("Checking configuration");
          if (!string.IsNullOrEmpty(javaExePath))
          {
             if (File.Exists(javaExePath))
@@ -198,6 +201,7 @@ namespace Aves
                Log.Warn($"Found location of java[='{javaExePath}'] in configuration, but was invalid. Trying to find java...");
          }
 
+         Log.Info("Checking env for JAVA_HOME");
          javaExePath = Environment.GetEnvironmentVariable("JAVA_HOME");
          if (!string.IsNullOrEmpty(javaExePath))
          {
@@ -209,6 +213,7 @@ namespace Aves
             }
          }
 
+         Log.Info("Checking cli");
          if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
          {
             Log.Info("Running on commandline[CMD]");

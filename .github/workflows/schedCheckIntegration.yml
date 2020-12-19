@@ -1,0 +1,23 @@
+name: Check Integration
+
+
+on:
+  schedule:
+    - cron: '23 1 * * 0'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download and Prepare
+        run: |
+          curl -L https://github.com/BaseMC/Aves/releases/latest/download/Aves-linux-x64.zip -o temp.zip
+          unzip temp.zip
+          rm temp.zip
+          chmod +x Aves
+          
+      - name: Execute testrun
+        run: |
+          ./Aves -v LATEST_SNAPSHOT
