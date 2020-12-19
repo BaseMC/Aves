@@ -7,6 +7,7 @@ Build the project yourself:
 
 ### Build an executable
 * Open a new commandline / shell in the repository-root
+* Move into ``src``
 * Build the project ``dotnet build``
 * Select the subfolder ``Aves`` (main project) and create an executable with ``dotnet publish -r <TargetedRuntime(OS)Identifier> -p:PublishSingleFile=true``
   * for the targeted ``RuntimeIdentfier`` see https://docs.microsoft.com/en-us/dotnet/core/rid-catalog

@@ -6,7 +6,7 @@
 ### Get required external files for ``Aves``
 Aves requires some external files, e.g. a [JVM](https://adoptopenjdk.net/), a [deobfuscator](https://github.com/BaseMC/javgent) and a [decompiler](https://github.com/BaseMC/avesflower)
 * Build ``ADB`` with configuration ``Debug`` (with ``Release`` it would need a ``GITHUB_TOKEN``)
-* Copy [config-dev.json](build/config-dev.json) into your ``ADB`` build output folder (e.g. ``ADB/bin/Debug/netcoreapp3.1``)
+* Copy [config-dev.json](build/config-dev.json) into your ``ADB`` build output folder (e.g. ``src/ADB/bin/Debug/netcoreapp3.1``)
 * Run in the ``ADB`` build output folder: ``ADB.exe -c config-dev.json -r <yourSystemRID>``
   * You can get the corresponding RID [here](https://docs.microsoft.com/en-us/dotnet/core/rid-catalog)<br/>Most common:
     * ``win-x64`` Windows 64bit
