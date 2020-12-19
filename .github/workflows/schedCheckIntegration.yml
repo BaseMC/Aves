@@ -16,7 +16,7 @@ jobs:
           curl -L https://github.com/BaseMC/Aves/releases/latest/download/Aves-linux-x64.zip -o temp.zip
           unzip temp.zip
           rm temp.zip
-          chmod -R +x
+          chmod -R +x .
           
       - name: Execute testrun
         run: |
