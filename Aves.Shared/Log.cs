@@ -160,7 +160,7 @@ namespace Aves.Shared
          [CallerFilePath] string sourceFilePath = "",
          [CallerLineNumber] int sourceLineNumber = 0)
       {
-         CoreFramework.Log.Error(message, memberName, sourceFilePath, sourceLineNumber);
+         CoreFramework.Log.Fatal(message, memberName, sourceFilePath, sourceLineNumber);
       }
 
       public static void Fatal(
@@ -170,7 +170,7 @@ namespace Aves.Shared
          [CallerFilePath] string sourceFilePath = "",
          [CallerLineNumber] int sourceLineNumber = 0)
       {
-         CoreFramework.Log.Error(message, ex, memberName, sourceFilePath, sourceLineNumber);
+         CoreFramework.Log.Fatal(message, ex, memberName, sourceFilePath, sourceLineNumber);
       }
 
       public static void Fatal(
@@ -179,7 +179,7 @@ namespace Aves.Shared
          [CallerFilePath] string sourceFilePath = "",
          [CallerLineNumber] int sourceLineNumber = 0)
       {
-         CoreFramework.Log.Error(ex, memberName, sourceFilePath, sourceLineNumber);
+         CoreFramework.Log.Fatal(ex, memberName, sourceFilePath, sourceLineNumber);
       }
    }
 }
