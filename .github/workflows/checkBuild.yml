@@ -4,11 +4,15 @@ on:
   workflow_dispatch:
   push:
     branches: [ develop ]
+    paths-ignore: 
+      - '**.md'
   pull_request:
     branches: [ develop ]
+    paths-ignore: 
+      - '**.md'
 
 jobs:
-  build_abd:
+  build_base:
     runs-on: ubuntu-latest
 
     steps:
@@ -45,7 +49,7 @@ jobs:
   build_variant:
     name: Variant
     runs-on: ubuntu-latest
-    needs: [build_abd]
+    needs: [build_base]
     strategy:
       matrix:
         os: [win-x64, linux-x64]
