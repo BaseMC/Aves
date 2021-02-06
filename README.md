@@ -8,7 +8,7 @@ Generates deobfuscated code based on the [emitted obfuscation files from mojang]
 ### [Download](https://github.com/BaseMC/Aves/releases/latest)
 
 #### Requirements
-* You have to agree to the license under which the obfuscation map files are licensed: <br/> ```# (c) 2020 Microsoft Corporation. These mappings are provided "as-is" and you bear the risk of using them. You may copy and use the mappings for development purposes, but you may not redistribute the mappings complete and unmodified. Microsoft makes no warranties, express or implied, with respect to the mappings provided here.  Use and modification of this document or the source code (in any form) of Minecraft: Java Edition is governed by the Minecraft End User License Agreement available at https://account.mojang.com/documents/minecraft_eula.```
+* You have to agree to the [license under which the obfuscation map files are licensed](https://minecraft.gamepedia.com/Obfuscation_map#License)
 * Recommended: 1.5-2 GB of RAM for the [decompiler](https://github.com/BaseMC/avesflower)
 * Supported MC-versions: 1.14.4 or ``>=``19w36a (1.15+)
 
