@@ -172,7 +172,7 @@ namespace ADB.Java
       {
          Log.Info("Extracting...");
 
-         var tempFile = Path.GetTempFileName();
+         var tempFile = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
          File.Delete(tempFile);
 
          Directory.CreateDirectory(tempFile);
