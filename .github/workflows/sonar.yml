@@ -62,6 +62,6 @@ jobs:
         working-directory: src
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"litetex_SWAPS" /o:"litetex" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"BaseMC_Aves" /o:"basemc" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
            dotnet build --configuration Release
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
