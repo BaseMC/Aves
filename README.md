@@ -25,6 +25,6 @@ So if Mojang doesn't do any (breaking) changes, it should work a long time :t-re
 
 ### [Usage](docs/Usage.md)
 
-### [Developing](docs/Developing.md) [![Build develop Azure](https://dev.azure.com/BaseMC/Aves/_apis/build/status/Develop?label=build%20develop)](https://dev.azure.com/BaseMC/Aves/_build/latest?definitionId=1) [![Build Develop](https://img.shields.io/github/workflow/status/BaseMC/Aves/Check%20Build/develop?label=build%20develop)](https://github.com/BaseMC/Aves/actions?query=workflow%3A%22Check+Build%22+branch%3Adevelop)
+### [Developing](docs/Developing.md) [![Build Develop](https://img.shields.io/github/workflow/status/BaseMC/Aves/Check%20Build/develop?label=build%20develop)](https://github.com/BaseMC/Aves/actions?query=workflow%3A%22Check+Build%22+branch%3Adevelop) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=BaseMC_Aves&metric=alert_status)](https://sonarcloud.io/dashboard?id=BaseMC_Aves)
 
 ### [Building](docs/Building.md)
