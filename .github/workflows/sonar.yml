@@ -8,6 +8,8 @@ on:
       - '**.md'
   pull_request:
     types: [opened, synchronize, reopened]
+    paths-ignore: 
+      - '**.md'
 
 jobs:
   sonar:
