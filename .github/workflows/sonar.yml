@@ -25,15 +25,17 @@ jobs:
         with:
           dotnet-version: 3.1.x
 
-      # Fixes https://github.com/actions/setup-dotnet/issues/155
-      - run: dotnet nuget list source
+      # Fixes 
+      # - https://github.com/actions/setup-dotnet/issues/155
+      # - https://github.com/actions/virtual-environments/issues/1090
+      - run: dotnet nuget locals all --clear
 
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
 
       - name: Cache SonarCloud packages
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ~\sonar\cache
           key: ${{ runner.os }}-sonar
@@ -41,7 +43,7 @@ jobs:
 
       - name: Cache SonarCloud scanner
         id: cache-sonar-scanner
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: .\src\.sonar\scanner
           key: ${{ runner.os }}-sonar-scanner
