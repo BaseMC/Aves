@@ -4,9 +4,9 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace Aves.Shared
+namespace Aves
 {
-   internal static class Log
+   public static class Log
    {
       private static string FormatForException(this string message, Exception ex)
       {
