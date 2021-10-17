@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Text;
 
 namespace Aves.Config
@@ -146,11 +147,7 @@ namespace Aves.Config
       /// <remarks>
       /// Server is included but not active
       /// </remarks>
-      public static readonly HashSet<VariantConfig> DEFAULT_VARIANTS = new HashSet<VariantConfig>()
-      {
-         CLIENT,
-         SERVER
-      };
+      public static readonly ImmutableHashSet<VariantConfig> DEFAULT_VARIANTS = ImmutableHashSet.Create(CLIENT, SERVER);
 
       public override bool Equals(object obj)
       {
