@@ -134,7 +134,7 @@ It's also possible to combine it with some parameters from above, e.g. ``-j`` or
 
 If you also want to set ``server`` to enabled (by default it isn't), use ``--genconf ... -p client server ``
 
-:point_right: For more detailed description of the configuration options take a look at the documentation of the [corresponding source files](/Aves/Config)
+:point_right: For more detailed description of the configuration options take a look at the documentation of the [corresponding source files](/src/Aves/Config)
 
 ##### 3. Run it as hybrid :twisted_rightwards_arrows:
 You can also use a json-Configuration with some commandline arguments, e.g. if you like to use a different version.<br/>

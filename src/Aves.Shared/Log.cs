@@ -1,18 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Aves
 {
-   /// <summary>
-   /// Adapter for CoreFramework
-   /// </summary>
-   internal class Log
+   public static class Log
    {
-      protected Log()
+      private static string FormatForException(this string message, Exception ex)
       {
-         //No instances pls
+         return $"{message}: {(ex != null ? ex.ToString() : "")}";
+      }
+
+      private static string FormatForContext(
+         this string message,
+         [CallerMemberName] string memberName = "",
+         [CallerFilePath] string sourceFilePath = "",
+         [CallerLineNumber] int sourceLineNumber = 0)
+      {
+         var fileName = Path.GetFileNameWithoutExtension(sourceFilePath);
+         var methodName = memberName;
+
+         return $"{fileName} [{methodName}] {message}";
       }
 
       public static void Verbose(
@@ -21,7 +31,10 @@ namespace Aves
          [CallerFilePath] string sourceFilePath = "",
          [CallerLineNumber] int sourceLineNumber = 0)
       {
-         CoreFramework.Log.Verbose(message, memberName, sourceFilePath, sourceLineNumber);
+         Serilog.Log.Verbose(
+            message
+               .FormatForContext(memberName, sourceFilePath, sourceLineNumber)
+            );
       }
 
       public static void Verbose(
@@ -31,7 +44,11 @@ namespace Aves
          [CallerFilePath] string sourceFilePath = "",
          [CallerLineNumber] int sourceLineNumber = 0)
       {
-         CoreFramework.Log.Verbose(message, ex, memberName, sourceFilePath, sourceLineNumber);
+         Serilog.Log.Verbose(
+            message
+               .FormatForException(ex)
+               .FormatForContext(memberName, sourceFilePath, sourceLineNumber)
+            );
       }
 
       public static void Verbose(
@@ -40,7 +57,11 @@ namespace Aves
          [CallerFilePath] string sourceFilePath = "",
          [CallerLineNumber] int sourceLineNumber = 0)
       {
-         CoreFramework.Log.Debug(ex, memberName, sourceFilePath, sourceLineNumber);
+
+         Serilog.Log.Verbose(
+            (ex != null ? ex.ToString() : "")
+               .FormatForContext(memberName, sourceFilePath, sourceLineNumber)
+            );
       }
 
       public static void Debug(
@@ -49,16 +70,24 @@ namespace Aves
          [CallerFilePath] string sourceFilePath = "",
          [CallerLineNumber] int sourceLineNumber = 0)
       {
-         CoreFramework.Log.Debug(message, memberName, sourceFilePath, sourceLineNumber);
+         Serilog.Log.Debug(
+            message
+               .FormatForContext(memberName, sourceFilePath, sourceLineNumber)
+            );
       }
 
       public static void Debug(
-         string message, Exception ex,
+         string message,
+         Exception ex,
          [CallerMemberName] string memberName = "",
          [CallerFilePath] string sourceFilePath = "",
          [CallerLineNumber] int sourceLineNumber = 0)
       {
-         CoreFramework.Log.Debug(message, ex, memberName, sourceFilePath, sourceLineNumber);
+         Serilog.Log.Debug(
+            message
+               .FormatForException(ex)
+               .FormatForContext(memberName, sourceFilePath, sourceLineNumber)
+            );
       }
 
       public static void Debug(
@@ -67,7 +96,11 @@ namespace Aves
          [CallerFilePath] string sourceFilePath = "",
          [CallerLineNumber] int sourceLineNumber = 0)
       {
-         CoreFramework.Log.Debug(ex, memberName, sourceFilePath, sourceLineNumber);
+
+         Serilog.Log.Debug(
+            (ex != null ? ex.ToString() : "")
+               .FormatForContext(memberName, sourceFilePath, sourceLineNumber)
+            );
       }
 
       public static void Info(
@@ -76,7 +109,10 @@ namespace Aves
          [CallerFilePath] string sourceFilePath = "",
          [CallerLineNumber] int sourceLineNumber = 0)
       {
-         CoreFramework.Log.Info(message, memberName, sourceFilePath, sourceLineNumber);
+         Serilog.Log.Information(
+            message
+               .FormatForContext(memberName, sourceFilePath, sourceLineNumber)
+            );
       }
 
       public static void Info(
@@ -86,7 +122,12 @@ namespace Aves
          [CallerFilePath] string sourceFilePath = "",
          [CallerLineNumber] int sourceLineNumber = 0)
       {
-         CoreFramework.Log.Info(message, ex, memberName, sourceFilePath, sourceLineNumber);
+
+         Serilog.Log.Information(
+            message
+               .FormatForException(ex)
+               .FormatForContext(memberName, sourceFilePath, sourceLineNumber)
+            );
       }
 
       public static void Info(
@@ -95,16 +136,23 @@ namespace Aves
          [CallerFilePath] string sourceFilePath = "",
          [CallerLineNumber] int sourceLineNumber = 0)
       {
-         CoreFramework.Log.Info(ex, memberName, sourceFilePath, sourceLineNumber);
+
+         Serilog.Log.Information(
+            (ex != null ? ex.ToString() : "")
+               .FormatForContext(memberName, sourceFilePath, sourceLineNumber)
+            );
       }
 
-      public static void Warn(
-         string message,
+      public static void Warn(string message,
          [CallerMemberName] string memberName = "",
          [CallerFilePath] string sourceFilePath = "",
          [CallerLineNumber] int sourceLineNumber = 0)
       {
-         CoreFramework.Log.Warn(message, memberName, sourceFilePath, sourceLineNumber);
+
+         Serilog.Log.Warning(
+            message
+               .FormatForContext(memberName, sourceFilePath, sourceLineNumber)
+            );
       }
 
       public static void Warn(
@@ -114,7 +162,12 @@ namespace Aves
          [CallerFilePath] string sourceFilePath = "",
          [CallerLineNumber] int sourceLineNumber = 0)
       {
-         CoreFramework.Log.Warn(message, ex, memberName, sourceFilePath, sourceLineNumber);
+
+         Serilog.Log.Warning(
+            message
+               .FormatForException(ex)
+               .FormatForContext(memberName, sourceFilePath, sourceLineNumber)
+            );
       }
 
       public static void Warn(
@@ -123,7 +176,11 @@ namespace Aves
          [CallerFilePath] string sourceFilePath = "",
          [CallerLineNumber] int sourceLineNumber = 0)
       {
-         CoreFramework.Log.Warn(ex, memberName, sourceFilePath, sourceLineNumber);
+
+         Serilog.Log.Warning(
+            (ex != null ? ex.ToString() : "")
+               .FormatForContext(memberName, sourceFilePath, sourceLineNumber)
+            );
       }
 
       public static void Error(
@@ -132,7 +189,11 @@ namespace Aves
          [CallerFilePath] string sourceFilePath = "",
          [CallerLineNumber] int sourceLineNumber = 0)
       {
-         CoreFramework.Log.Error(message, memberName, sourceFilePath, sourceLineNumber);
+
+         Serilog.Log.Error(
+            message
+               .FormatForContext(memberName, sourceFilePath, sourceLineNumber)
+           );
       }
 
       public static void Error(
@@ -142,7 +203,12 @@ namespace Aves
          [CallerFilePath] string sourceFilePath = "",
          [CallerLineNumber] int sourceLineNumber = 0)
       {
-         CoreFramework.Log.Error(message, ex, memberName, sourceFilePath, sourceLineNumber);
+
+         Serilog.Log.Error(
+            message
+               .FormatForException(ex)
+               .FormatForContext(memberName, sourceFilePath, sourceLineNumber)
+            );
       }
 
       public static void Error(
@@ -151,7 +217,11 @@ namespace Aves
          [CallerFilePath] string sourceFilePath = "",
          [CallerLineNumber] int sourceLineNumber = 0)
       {
-         CoreFramework.Log.Error(ex, memberName, sourceFilePath, sourceLineNumber);
+
+         Serilog.Log.Error(
+            (ex != null ? ex.ToString() : "")
+               .FormatForContext(memberName, sourceFilePath, sourceLineNumber)
+            );
       }
 
       public static void Fatal(
@@ -160,7 +230,12 @@ namespace Aves
          [CallerFilePath] string sourceFilePath = "",
          [CallerLineNumber] int sourceLineNumber = 0)
       {
-         CoreFramework.Log.Error(message, memberName, sourceFilePath, sourceLineNumber);
+         FatalAction();
+
+         Serilog.Log.Error(
+            message
+               .FormatForContext(memberName, sourceFilePath, sourceLineNumber)
+            );
       }
 
       public static void Fatal(
@@ -170,7 +245,13 @@ namespace Aves
          [CallerFilePath] string sourceFilePath = "",
          [CallerLineNumber] int sourceLineNumber = 0)
       {
-         CoreFramework.Log.Error(message, ex, memberName, sourceFilePath, sourceLineNumber);
+         FatalAction();
+
+         Serilog.Log.Error(
+            message
+               .FormatForException(ex)
+               .FormatForContext(memberName, sourceFilePath, sourceLineNumber)
+            );
       }
 
       public static void Fatal(
@@ -179,7 +260,17 @@ namespace Aves
          [CallerFilePath] string sourceFilePath = "",
          [CallerLineNumber] int sourceLineNumber = 0)
       {
-         CoreFramework.Log.Error(ex, memberName, sourceFilePath, sourceLineNumber);
+         FatalAction();
+
+         Serilog.Log.Error(
+            (ex != null ? ex.ToString() : "")
+               .FormatForContext(memberName, sourceFilePath, sourceLineNumber)
+            );
+      }
+
+      private static void FatalAction()
+      {
+         Environment.ExitCode = -1;
       }
    }
 }

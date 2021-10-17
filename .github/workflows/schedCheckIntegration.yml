@@ -3,7 +3,7 @@ name: Check Integration
 
 on:
   schedule:
-    - cron: '23 1 * * 0'
+    - cron: '23 1 1 * *'
   workflow_dispatch:
 
 jobs:
@@ -16,7 +16,7 @@ jobs:
           curl -L https://github.com/BaseMC/Aves/releases/latest/download/Aves-linux-x64.zip -o temp.zip
           unzip temp.zip
           rm temp.zip
-          chmod +x Aves
+          chmod -R +x .
           
       - name: Execute testrun
         run: |

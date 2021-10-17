@@ -1,6 +1,5 @@
 branches:
   - master
-  - master-release-test
 name-template: "v$RESOLVED_VERSION"
 tag-template: "v$RESOLVED_VERSION"
 version-resolver:

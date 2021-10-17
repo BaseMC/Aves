@@ -38,7 +38,7 @@ namespace Aves.Util
          {
             StartInfo = new ProcessStartInfo
             {
-               FileName = "cmd",
+               FileName = @"C:\Windows\System32\cmd.exe",
                Arguments = $"/C \"{escapedArgs}\"",
                RedirectStandardOutput = true,
                UseShellExecute = false,

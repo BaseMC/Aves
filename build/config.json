@@ -1,6 +1,6 @@
 {
   "DestinationDir": null,
-  "DestinationDirPattern": "../Aves/bin/{BuildConfiguration}/netcoreapp3.1/{RID}/publish",
+  "DestinationDirPattern": "../src/Aves/bin/{BuildConfiguration}/netcoreapp3.1/{RID}/publish",
   "BuildConfiguration": null,
   "RID": null,
   "GitHubConfig": {

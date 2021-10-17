@@ -8,7 +8,7 @@ Generates deobfuscated code based on the [emitted obfuscation files from mojang]
 ### [Download](https://github.com/BaseMC/Aves/releases/latest)
 
 #### Requirements
-* You can only use the generated code under mojang's license: <br/> ```(c) 2019 Microsoft Corporation.  All rights reserved.  This information is provided "as-is" and you bear the risk of using it. This information does not provide you with any legal rights to any intellectual property in any Microsoft product. You may copy and use this information for your internal, reference purposes. Microsoft makes no warranties, express or implied, with respect to the information provided here.```
+* You have to agree to the [license under which the obfuscation map files are licensed](https://minecraft.gamepedia.com/Obfuscation_map#License)
 * Recommended: 1.5-2 GB of RAM for the [decompiler](https://github.com/BaseMC/avesflower)
 * Supported MC-versions: 1.14.4 or ``>=``19w36a (1.15+)
 
@@ -25,6 +25,6 @@ So if Mojang doesn't do any (breaking) changes, it should work a long time :t-re
 
 ### [Usage](docs/Usage.md)
 
-### [Developing](docs/Developing.md) [![Build develop](https://dev.azure.com/BaseMC/Aves/_apis/build/status/Develop?label=build%20develop)](https://dev.azure.com/BaseMC/Aves/_build/latest?definitionId=1)
+### [Developing](docs/Developing.md) [![Build Develop](https://img.shields.io/github/workflow/status/BaseMC/Aves/Check%20Build/develop?label=build%20develop)](https://github.com/BaseMC/Aves/actions?query=workflow%3A%22Check+Build%22+branch%3Adevelop) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=BaseMC_Aves&metric=alert_status)](https://sonarcloud.io/dashboard?id=BaseMC_Aves)
 
 ### [Building](docs/Building.md)
