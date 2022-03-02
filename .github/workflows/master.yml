@@ -12,7 +12,7 @@ jobs:
          upload_url: ${{ steps.create_draft.outputs.upload_url }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v2
@@ -59,7 +59,7 @@ jobs:
         project: [Aves]
     
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
           
       - name: Download ADB - Download Artifact
         uses: actions/download-artifact@v2
