@@ -41,7 +41,7 @@ jobs:
         run: zip -r ADB.zip . -x \*.pdb
 
       - name: Upload ADB - Upload Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ADB
           path: src/ADB/bin/Release/netcoreapp3.1/publish/ADB.zip
@@ -89,7 +89,7 @@ jobs:
         run: zip -r ${{ matrix.project }}.zip . -x \*.pdb
         
       - name: Upload ${{ matrix.project }}-${{ matrix.os }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.project }}-${{ matrix.os }}
           path: ./src/${{ matrix.project }}/bin/${{ matrix.configuration }}/netcoreapp3.1/${{ matrix.os }}/publish/${{ matrix.project }}.zip
