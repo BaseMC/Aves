@@ -9,7 +9,7 @@ Description: Creates source code for 1.14.4 (by default: client only)
 
     .
     ├─── javgent-standalone.jar          # Deobfuscator → see https://github.com/BaseMC/javgent
-    ├─── avesflower.jar                  # Decompiler → see https://github.com/BaseMC/avesflower
+    ├─── vineflower.jar                  # Decompiler → see https://github.com/Vineflower/vineflower
     ├─── jre                             # Embedded Java Runtime Environment → see https://adoptopenjdk.net/
     ├─── logs                            # Generated log files (if enabled)
     └─┬─ workingDir                      # Main Working Directory

@@ -9,7 +9,7 @@ Generates deobfuscated code based on the [emitted obfuscation files from mojang]
 
 #### Requirements
 * You have to agree to the [license under which the obfuscation map files are licensed](https://minecraft.gamepedia.com/Obfuscation_map#License)
-* Recommended: 1.5-2 GB of RAM for the [decompiler](https://github.com/BaseMC/avesflower)
+* Recommended: 1.5-2 GB of RAM for the [decompiler](https://github.com/Vineflower/vineflower)
 * Supported MC-versions: 1.14.4 or ``>=``19w36a (1.15+)
 
 ### Why?
