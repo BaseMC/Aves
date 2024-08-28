@@ -82,7 +82,7 @@ namespace Aves.Config
       /// if not absloute: relative to <see cref="AppDomain.CurrentDomain.BaseDirectory"/>
       /// </summary>
       /// <example>
-      /// "C:\Program Files\Java\jre1.11.0_XXX\bin\java.exe"
+      /// "C:\Program Files\Java\21.0_XXX\bin\java.exe"
       /// </example>
       public string JavaExePath { get; set; } = Path.Combine("jre", "bin", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "java.exe" : "java");
 
