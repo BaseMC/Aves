@@ -34,13 +34,12 @@ namespace Aves.MakeRead.Provider
       {
          Log.Info($"Decompiler starting for '{variant.Name}'");
 
-         var parent = Directory.GetParent(variant.DecompiledFile).ToString();
-         DirUtil.EnsureCreatedAndClean(parent);
+         DirUtil.EnsureCreatedAndClean(variant.OutputFilesDirFolder);
 
          var formattedBaseCommand = config.BaseDecompilerCommand
             .Replace("{Decompiler}", config.Decompiler)
             .Replace("{SrcFile}", variant.DeObfuscatedFile)
-            .Replace("{TargetDir}", parent);
+            .Replace("{TargetDir}", Path.GetFullPath(variant.OutputFilesDirFolder));
 
          var command = $"{formattedBaseCommand}";
 

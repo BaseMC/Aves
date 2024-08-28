@@ -33,18 +33,18 @@ jobs:
         run: dotnet publish -c Release
 
       - name: Self test build tool - ADB
-        working-directory: src/ADB/bin/Release/netcoreapp3.1/publish
+        working-directory: src/ADB/bin/Release/net8.0/publish
         run: ./ADB --version
 
       - name: Pack ADB - ADB
-        working-directory: src/ADB/bin/Release/netcoreapp3.1/publish
+        working-directory: src/ADB/bin/Release/net8.0/publish
         run: zip -r ADB.zip . -x \*.pdb
 
       - name: Upload ADB - Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: ADB
-          path: src/ADB/bin/Release/netcoreapp3.1/publish/ADB.zip
+          path: src/ADB/bin/Release/net8.0/publish/ADB.zip
         
   build_variant:
     name: Variant
@@ -85,11 +85,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
       - name: Pack ${{ matrix.os }} - Zip
-        working-directory: src/${{ matrix.project }}/bin/${{ matrix.configuration }}/netcoreapp3.1/${{ matrix.os }}/publish/
+        working-directory: src/${{ matrix.project }}/bin/${{ matrix.configuration }}/net8.0/${{ matrix.os }}/publish/
         run: zip -r ${{ matrix.project }}.zip . -x \*.pdb
         
       - name: Upload ${{ matrix.project }}-${{ matrix.os }}
         uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.project }}-${{ matrix.os }}
-          path: ./src/${{ matrix.project }}/bin/${{ matrix.configuration }}/netcoreapp3.1/${{ matrix.os }}/publish/${{ matrix.project }}.zip
+          path: ./src/${{ matrix.project }}/bin/${{ matrix.configuration }}/net8.0/${{ matrix.os }}/publish/${{ matrix.project }}.zip

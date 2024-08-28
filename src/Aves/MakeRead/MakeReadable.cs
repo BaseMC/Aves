@@ -24,8 +24,7 @@ namespace Aves.MakeRead
       private readonly List<IMRProvider> providers = new List<IMRProvider>()
       {
          new MRDeobfProvider(),
-         new MRDecompProvider(),
-         new MRExtractProvider()
+         new MRDecompProvider()
       };
 
       public void Run()

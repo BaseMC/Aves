@@ -53,7 +53,7 @@ namespace ADB
       protected void FillSampleData()
       {
          if (string.IsNullOrWhiteSpace(Config.DestinationDirPattern))
-            Config.DestinationDirPattern = "bin/{BuildConfiguration}/netcoreapp3.1/{RID}/publish";
+            Config.DestinationDirPattern = "bin/{BuildConfiguration}/net8.0/{RID}/publish";
 
          if (Config.GitHubConfig.ProjectConfigs.Count == 0)
             Config.GitHubConfig.ProjectConfigs.Add(new ADB.Config.Github.GitHubProjectConfig()

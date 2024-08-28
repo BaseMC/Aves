@@ -104,7 +104,7 @@ namespace Aves.Config
       /// <summary>
       /// Decompiler; if not absloute: relative to <see cref="System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName"/>
       /// </summary>
-      public string Decompiler { get; set; } = "avesflower.jar";
+      public string Decompiler { get; set; } = "vineflower.jar";
 
       /// <summary>
       /// Timeout for Decompiler, null = no timeout

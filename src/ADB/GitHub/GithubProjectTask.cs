@@ -8,6 +8,7 @@ using System.IO;
 using System.Text;
 using System.Linq;
 using Aves.Shared.Download;
+using System.Text.RegularExpressions;
 
 namespace ADB.GitHub
 {
@@ -35,15 +36,19 @@ namespace ADB.GitHub
          var release = Client.Repository.Release.GetLatest(GithubProjectConfig.Owner, GithubProjectConfig.Repo).Result;
 
          //https://developer.github.com/v3/repos/releases/
-
          TaskRunner.RunTasks(
            release.Assets
+              .Where(asset => GithubProjectConfig.AssetNameMatcher == null || Regex.IsMatch(asset.Name, GithubProjectConfig.AssetNameMatcher))
               .Select(asset =>
-                  BasicDownloader.Default.RunDownloadAsync(
+              {
+                  var newName = GithubProjectConfig.AssetNameMatcher != null && GithubProjectConfig.AssetNameReplacePattern != null
+                     ? Regex.Replace(asset.Name, GithubProjectConfig.AssetNameMatcher, GithubProjectConfig.AssetNameReplacePattern)
+                     : asset.Name;
+                  return BasicDownloader.Default.RunDownloadAsync(
                      asset.BrowserDownloadUrl,
-                     Path.Combine(Configuration.DestinationDir, asset.Name),
-                     asset.Size)
-                 )
+                     Path.Combine(Configuration.DestinationDir, newName),
+                     asset.Size);
+              })
               .ToArray()
            );
       }
