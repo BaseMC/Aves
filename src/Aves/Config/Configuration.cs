@@ -170,11 +170,6 @@ namespace Aves.Config
       public string DeObfuscatedDirectory { get; set; } = "deof";
 
       /// <summary>
-      /// Output Directory for decompiled files (.jar); if not absloute: relative to <see cref="VersionWorkingDirectory"/>
-      /// </summary>
-      public string DecompiledDirectory { get; set; } = "dec";
-
-      /// <summary>
       /// Output Directory; if not absloute: relative to <see cref="VersionWorkingDirectory"/>
       /// </summary>
       public string OutputDirectory { get; set; } = "output";

@@ -108,11 +108,6 @@ namespace Aves
 
          DirUtil.EnsureCreated(Config.DeObfuscatedDirectory);
 
-         Config.DecompiledDirectory = BuildPath(nameof(Config.DecompiledDirectory), Config.DecompiledDirectory, Config.VersionWorkingDirectory);
-         Log.Info($"Set {nameof(Config.DecompiledDirectory)}='{Config.DecompiledDirectory}'");
-
-         DirUtil.EnsureCreated(Config.DecompiledDirectory);
-
 
          Config.OutputDirectory = BuildPath(nameof(Config.OutputDirectory), Config.OutputDirectory, Config.VersionWorkingDirectory);
          Log.Info($"Set {nameof(Config.OutputDirectory)}='{Config.OutputDirectory}'");
@@ -149,13 +144,6 @@ namespace Aves
             variant.DeObfuscatedFile = BuildPath($"{variant.Name}/{nameof(variant.DeObfuscatedFile)}", variant.DeObfuscatedFile, basePathDeobf);
 
             DirUtil.EnsureCreated(basePathDeobf);
-
-
-            var basePathDisas = Path.Combine(Config.DecompiledDirectory, variant.Name);
-            variant.DecompiledFile = BuildPath($"{variant.Name}/{nameof(variant.DecompiledFile)}", variant.DecompiledFile, basePathDisas);
-
-            DirUtil.EnsureCreated(basePathDisas);
-
 
             variant.OutputFilesDirFolder = BuildPath(nameof(variant.OutputFilesDirFolder), variant.OutputFilesDirFolder, Config.OutputDirectory);
 
