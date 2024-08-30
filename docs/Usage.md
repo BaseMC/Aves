@@ -28,9 +28,6 @@ Description: Creates source code for 1.14.4 (by default: client only)
         ├─┬─ deof                        # Deobfuscated files
         │ └─┬─ client                   
         │   └── client.jar               # Deobfuscated file (Obfuscated names, fixed stuff like: avm → Zombie)
-        ├─┬─ dec                         # Decompiled files
-        │ └─┬─ client                    
-        │   └── client.jar               # Decompiled file; files are getting decompiled to human-readable form
         └─┬─ output                      # human-readable Source-Code
           └─┬─ client                    
             ├── *                        # SourceFiles; unzipped disassmebled source.jar (client.jar)

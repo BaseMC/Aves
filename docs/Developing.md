@@ -1,6 +1,6 @@
 ## Developing
 ### Tools for developing
-* [Visual Studio 2019](https://visualstudio.microsoft.com/en/vs/)
+* [Visual Studio](https://visualstudio.microsoft.com/en/vs/)
 * [SonarLint VS](https://www.sonarlint.org/visualstudio/)
 
 ### Get required external files for ``Aves``

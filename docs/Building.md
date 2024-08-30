@@ -3,7 +3,7 @@ Don't want to use the [official releases](https://github.com/BaseMC/Aves/release
 Build the project yourself:
 
 ### Requirements
-* [.NET Core 3.1 SDK](https://dotnet.microsoft.com/download/dotnet-core/3.1)
+* [.NET 8.0](https://dotnet.microsoft.com/en-us/download)
 
 ### Build an executable
 * Open a new commandline / shell in the repository-root
