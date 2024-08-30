@@ -1,4 +1,6 @@
-# Aves [![Build](https://img.shields.io/github/workflow/status/BaseMC/Aves/Master%20CI)](https://github.com/BaseMC/Aves/actions?query=workflow%3A%22Master+CI%22)  [![Latest Version](https://img.shields.io/github/v/release/BaseMC/Aves)](https://github.com/BaseMC/Aves/releases)
+[![Latest Version](https://img.shields.io/github/v/release/BaseMC/Aves)](https://github.com/BaseMC/Aves/releases)
+
+# Aves
 A Minecraft deobfusctor / code generator
 
 Generates deobfuscated code based on the [emitted obfuscation files from mojang](https://www.minecraft.net/article/minecraft-snapshot-19w36a) (since 19w36a) in about 5 minutes
@@ -25,6 +27,6 @@ So if Mojang doesn't do any (breaking) changes, it should work a long time :t-re
 
 ### [Usage](docs/Usage.md)
 
-### [Developing](docs/Developing.md) [![Build Develop](https://img.shields.io/github/workflow/status/BaseMC/Aves/Check%20Build/develop?label=build%20develop)](https://github.com/BaseMC/Aves/actions?query=workflow%3A%22Check+Build%22+branch%3Adevelop) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=BaseMC_Aves&metric=alert_status)](https://sonarcloud.io/dashboard?id=BaseMC_Aves)
+### [Developing](docs/Developing.md)
 
 ### [Building](docs/Building.md)
