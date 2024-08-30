@@ -21,6 +21,10 @@ Generates deobfuscated code based on the [emitted obfuscation files from mojang]
 ### [Building](docs/Building.md)
 
 ### Why?
+> [!IMPORTANT]
+> This project is not meant for game modifications!<br/>
+> Use a modding platform like [Fabric](https://fabricmc.net/) instead
+
 This project is designed for quickly inspecting new game versions.
 
 The generated code is not perfect, but it's readable and that's what it's meant for.
