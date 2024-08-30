@@ -122,7 +122,6 @@ It's also possible to combine it with some parameters from above, e.g. ``-j`` or
   "MappingFilesDir": "mappings",
   "PatchFilesDir": "patch",
   "DeObfuscatedDirectory": "deof",
-  "DecompiledDirectory": "dec",
   "OutputDirectory": "output",
   "OutputDirectoryMetaFiles": "output-meta",
   "OutputDirLibs": "libs",
