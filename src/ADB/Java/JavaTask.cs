@@ -5,15 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using System.Collections.Specialized;
-using System.Web;
-using System.Net;
 using Newtonsoft.Json.Linq;
 using Aves.Shared.Download;
 using System.IO;
 using System.IO.Compression;
 using System.Threading.Tasks;
 using ADB.Util;
+using System.Net.Http;
 
 namespace ADB.Java
 {
@@ -97,13 +95,13 @@ namespace ADB.Java
 
       private string Download()
       {
-         using var wc = new WebClient();
+         using var wc = new HttpClient();
 
          Uri downloadUri = GetDownloadURI();
 
          Log.Info($"Downloading from '{downloadUri}'");
 
-         var metaJSON = wc.DownloadString(downloadUri);
+         var metaJSON = wc.GetStringAsync(downloadUri).Result;
 
          Log.Info($"Got this: {metaJSON}");
 
@@ -302,7 +300,7 @@ namespace ADB.Java
                var output = Path.Combine(outputDir, name);
                if (!Directory.Exists(Path.GetDirectoryName(output)))
                   Directory.CreateDirectory(Path.GetDirectoryName(output));
-               if (!name.EndsWith("/"))
+               if (!name.EndsWith('/'))
                {
                   using var str = File.Open(output, FileMode.OpenOrCreate, FileAccess.Write);
 
