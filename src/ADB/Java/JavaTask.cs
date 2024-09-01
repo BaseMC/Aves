@@ -66,8 +66,7 @@ namespace ADB.Java
 
          Config.Architecture = new ApiArch[] {
             ApiArch.X64,
-            ApiArch.X86,
-            ApiArch.ARM
+            ApiArch.AARCH64
          }.FirstOrDefault(os => os.Matcher.Invoke(ridArch))?.ApiPar;
 
          Log.Info($"RID='{rid}' -> OS='{Config.OS}'; Arch='{Config.Architecture}'");
