@@ -93,9 +93,9 @@ namespace Aves.Shared.Download
          return true;
       }
 
-      public static CheckSumDownloader SHA1 => new CheckSumDownloader(() => new SHA1CryptoServiceProvider());
+      public static CheckSumDownloader SHA1 => new CheckSumDownloader(System.Security.Cryptography.SHA1.Create);
 
-      public static CheckSumDownloader SHA256 => new CheckSumDownloader(() => new SHA256CryptoServiceProvider());
+      public static CheckSumDownloader SHA256 => new CheckSumDownloader(System.Security.Cryptography.SHA256.Create);
 
    }
 }
