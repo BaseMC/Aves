@@ -281,17 +281,6 @@ namespace ADB.Java
          /// <summary>
          /// Extractes a <c>tar</c> archive to the specified directory.
          /// </summary>
-         /// <param name="filename">The <i>.tar</i> to extract.</param>
-         /// <param name="outputDir">Output directory to write the files.</param>
-         public static void ExtractTar(string filename, string outputDir)
-         {
-            using var stream = File.OpenRead(filename);
-            ExtractTar(stream, outputDir);
-         }
-
-         /// <summary>
-         /// Extractes a <c>tar</c> archive to the specified directory.
-         /// </summary>
          /// <param name="stream">The <i>.tar</i> to extract.</param>
          /// <param name="outputDir">Output directory to write the files.</param>
          public static void ExtractTar(Stream stream, string outputDir)
