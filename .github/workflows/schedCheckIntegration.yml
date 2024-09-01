@@ -3,7 +3,7 @@ name: Check Integration
 
 on:
   schedule:
-    - cron: '23 1 1 * *'
+    - cron: '23 1 1 * 1'
   workflow_dispatch:
 
 jobs:

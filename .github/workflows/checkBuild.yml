@@ -16,12 +16,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 3.1.x
+          dotnet-version: 8.x
 
       - name: Build - Dotnet Build Release
         run: dotnet build --configuration Release
@@ -33,18 +33,18 @@ jobs:
         run: dotnet publish -c Release
 
       - name: Self test build tool - ADB
-        working-directory: src/ADB/bin/Release/netcoreapp3.1/publish
+        working-directory: src/ADB/bin/Release/net8.0/publish
         run: ./ADB --version
 
       - name: Pack ADB - ADB
-        working-directory: src/ADB/bin/Release/netcoreapp3.1/publish
+        working-directory: src/ADB/bin/Release/net8.0/publish
         run: zip -r ADB.zip . -x \*.pdb
 
       - name: Upload ADB - Upload Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: ADB
-          path: src/ADB/bin/Release/netcoreapp3.1/publish/ADB.zip
+          path: src/ADB/bin/Release/net8.0/publish/ADB.zip
         
   build_variant:
     name: Variant
@@ -57,10 +57,10 @@ jobs:
         project: [Aves]
     
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
           
       - name: Download ADB - Download Artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: ADB
           path: temp_artf/ADB
@@ -69,9 +69,9 @@ jobs:
         run: unzip temp_artf/ADB/ADB.zip -d build
       
       - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 3.1.x
+          dotnet-version: 8.x
               
       - name: Publish ${{ matrix.os }} ${{ matrix.configuration }} - dotnet publish 
         working-directory: src/${{ matrix.project }}
@@ -85,11 +85,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
       - name: Pack ${{ matrix.os }} - Zip
-        working-directory: src/${{ matrix.project }}/bin/${{ matrix.configuration }}/netcoreapp3.1/${{ matrix.os }}/publish/
+        working-directory: src/${{ matrix.project }}/bin/${{ matrix.configuration }}/net8.0/${{ matrix.os }}/publish/
         run: zip -r ${{ matrix.project }}.zip . -x \*.pdb
         
       - name: Upload ${{ matrix.project }}-${{ matrix.os }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.project }}-${{ matrix.os }}
-          path: ./src/${{ matrix.project }}/bin/${{ matrix.configuration }}/netcoreapp3.1/${{ matrix.os }}/publish/${{ matrix.project }}.zip
+          path: ./src/${{ matrix.project }}/bin/${{ matrix.configuration }}/net8.0/${{ matrix.os }}/publish/${{ matrix.project }}.zip

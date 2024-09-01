@@ -82,7 +82,7 @@ namespace Aves.Config
       /// if not absloute: relative to <see cref="AppDomain.CurrentDomain.BaseDirectory"/>
       /// </summary>
       /// <example>
-      /// "C:\Program Files\Java\jre1.11.0_XXX\bin\java.exe"
+      /// "C:\Program Files\Java\21.0_XXX\bin\java.exe"
       /// </example>
       public string JavaExePath { get; set; } = Path.Combine("jre", "bin", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "java.exe" : "java");
 
@@ -104,7 +104,7 @@ namespace Aves.Config
       /// <summary>
       /// Decompiler; if not absloute: relative to <see cref="System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName"/>
       /// </summary>
-      public string Decompiler { get; set; } = "avesflower.jar";
+      public string Decompiler { get; set; } = "vineflower.jar";
 
       /// <summary>
       /// Timeout for Decompiler, null = no timeout
@@ -127,7 +127,7 @@ namespace Aves.Config
       ///  </item>
       /// </list>
       /// </remarks>
-      /// <seealso cref="https://github.com/BaseMC/avesflower"/>
+      /// <seealso cref="https://github.com/Vineflower/vineflower"/>
       public string BaseDecompilerCommand { get; set; } = "-jar \"{Decompiler}\" -dgs=1 -rsy=1 -lit=1 -mpm=60 \"{SrcFile}\" \"{TargetDir}\"";
 
 #region Workdir
@@ -168,11 +168,6 @@ namespace Aves.Config
       /// Output Directory for deobfuscated files (.jar); if not absloute: relative to <see cref="VersionWorkingDirectory"/>
       /// </summary>
       public string DeObfuscatedDirectory { get; set; } = "deof";
-
-      /// <summary>
-      /// Output Directory for decompiled files (.jar); if not absloute: relative to <see cref="VersionWorkingDirectory"/>
-      /// </summary>
-      public string DecompiledDirectory { get; set; } = "dec";
 
       /// <summary>
       /// Output Directory; if not absloute: relative to <see cref="VersionWorkingDirectory"/>

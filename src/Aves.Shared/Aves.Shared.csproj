@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     
     <!-- Emulate .NET Frameworks versioning behavior 'GenerateVersionFromPatternAndCurrentTime' (UTC based) -->
     <!-- https://github.com/dotnet/sdk/issues/8416#issuecomment-354095128 -->
@@ -12,6 +12,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="Serilog" Version="4.0.1" />
   </ItemGroup>
 </Project>

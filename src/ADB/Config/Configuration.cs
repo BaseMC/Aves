@@ -24,7 +24,7 @@ namespace ADB.Config
       /// / are replaced with <see cref="Path.DirectorySeparatorChar"/>
       /// </remarks>
       /// <example>
-      /// Aves/bin/{BuildConfiguration}/netcoreapp3.1/{RID}/publish
+      /// Aves/bin/{BuildConfiguration}/net8.0/{RID}/publish
       /// </example>
       public string DestinationDirPattern { get; set; }
 

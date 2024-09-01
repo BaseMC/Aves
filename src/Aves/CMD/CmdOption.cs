@@ -30,7 +30,7 @@ namespace Aves.CMD
       [Option('v', "mcversion", HelpText = "version that should be used; e.g. 1.15")]
       public string Version { get; set; } = null;
 
-      [Option('j', "java", HelpText = "path to java.exe (requires Java 11+)")]
+      [Option('j', "java", HelpText = "path to java.exe (requires Java 21+)")]
       public string JavaExePath { get; set; } = null;
 
       [Option('p', "profiles", HelpText = "name of the profiles/variants which should get executed (they are also executed if they are disabled); Default: client only")]

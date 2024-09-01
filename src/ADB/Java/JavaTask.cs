@@ -5,15 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using System.Collections.Specialized;
-using System.Web;
-using System.Net;
 using Newtonsoft.Json.Linq;
 using Aves.Shared.Download;
 using System.IO;
 using System.IO.Compression;
 using System.Threading.Tasks;
 using ADB.Util;
+using System.Net.Http;
 
 namespace ADB.Java
 {
@@ -97,13 +95,13 @@ namespace ADB.Java
 
       private string Download()
       {
-         using var wc = new WebClient();
+         using var wc = new HttpClient();
 
          Uri downloadUri = GetDownloadURI();
 
          Log.Info($"Downloading from '{downloadUri}'");
 
-         var metaJSON = wc.DownloadString(downloadUri);
+         var metaJSON = wc.GetStringAsync(downloadUri).Result;
 
          Log.Info($"Got this: {metaJSON}");
 
@@ -269,25 +267,13 @@ namespace ADB.Java
             using var memStr = new MemoryStream();
             int read;
             var buffer = new byte[chunk];
-            do
+            while ((read = gzip.Read(buffer, 0, buffer.Length)) > 0)
             {
-               read = gzip.Read(buffer, 0, chunk);
                memStr.Write(buffer, 0, read);
-            } while (read == chunk);
+            }
 
             memStr.Seek(0, SeekOrigin.Begin);
             ExtractTar(memStr, outputDir);
-         }
-
-         /// <summary>
-         /// Extractes a <c>tar</c> archive to the specified directory.
-         /// </summary>
-         /// <param name="filename">The <i>.tar</i> to extract.</param>
-         /// <param name="outputDir">Output directory to write the files.</param>
-         public static void ExtractTar(string filename, string outputDir)
-         {
-            using var stream = File.OpenRead(filename);
-            ExtractTar(stream, outputDir);
          }
 
          /// <summary>
@@ -314,7 +300,7 @@ namespace ADB.Java
                var output = Path.Combine(outputDir, name);
                if (!Directory.Exists(Path.GetDirectoryName(output)))
                   Directory.CreateDirectory(Path.GetDirectoryName(output));
-               if (!name.EndsWith("/"))
+               if (!name.EndsWith('/'))
                {
                   using var str = File.Open(output, FileMode.OpenOrCreate, FileAccess.Write);
 

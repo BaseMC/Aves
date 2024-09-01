@@ -15,7 +15,7 @@ namespace ADB.Config.Java
       /// <summary>
       /// Remote URL
       /// </summary>
-      public string RemoteBaseURL { get; set; } = "https://api.adoptopenjdk.net/v3/assets/feature_releases/{feature_version}/{release_type}";
+      public string RemoteBaseURL { get; set; } = "https://api.adoptium.net/v3/assets/feature_releases/{feature_version}/{release_type}";
 
       /// <summary>
       /// Version
@@ -26,7 +26,7 @@ namespace ADB.Config.Java
       /// <example>
       /// 8, ... 11, 12, ...
       /// </example>
-      public int FeatureVersion { get; set; } = 11;
+      public int FeatureVersion { get; set; } = 21;
 
       /// <summary>
       /// ReleaseType
@@ -124,6 +124,6 @@ namespace ADB.Config.Java
       /// <example>
       /// jdk, valhalla, ...
       /// </example>
-      public string Vendor { get; set; } = "adoptopenjdk";
+      public string Vendor { get; set; } = "eclipse";
    }
 }

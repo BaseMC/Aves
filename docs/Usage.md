@@ -9,7 +9,7 @@ Description: Creates source code for 1.14.4 (by default: client only)
 
     .
     ├─── javgent-standalone.jar          # Deobfuscator → see https://github.com/BaseMC/javgent
-    ├─── avesflower.jar                  # Decompiler → see https://github.com/BaseMC/avesflower
+    ├─── vineflower.jar                  # Decompiler → see https://github.com/Vineflower/vineflower
     ├─── jre                             # Embedded Java Runtime Environment → see https://adoptopenjdk.net/
     ├─── logs                            # Generated log files (if enabled)
     └─┬─ workingDir                      # Main Working Directory
@@ -28,9 +28,6 @@ Description: Creates source code for 1.14.4 (by default: client only)
         ├─┬─ deof                        # Deobfuscated files
         │ └─┬─ client                   
         │   └── client.jar               # Deobfuscated file (Obfuscated names, fixed stuff like: avm → Zombie)
-        ├─┬─ dec                         # Decompiled files
-        │ └─┬─ client                    
-        │   └── client.jar               # Decompiled file; files are getting decompiled to human-readable form
         └─┬─ output                      # human-readable Source-Code
           └─┬─ client                    
             ├── *                        # SourceFiles; unzipped disassmebled source.jar (client.jar)
@@ -47,7 +44,7 @@ Description: Creates source code for 1.14.4 (by default: client only)
 |``--genconf <value>``|only generates a json-Config file<br/> value = JSON-Config file to generate | ``--genconf config.json`` |
 |``-c <value>`` ``--conf <value>``|load a json-Config file<br/> value = JSON-Config file (see below) |``-c config.json`` (uses a file called config.json for configuration)|
 |``-v`` ``--mcversion``|Required (if using no json file for configuration)<br /> Version that should be downloaded|``-v 1.14.4`` (generates files for 1.14.4)<br/>``-v LATEST`` (generates files for latest version)|
-|``-j`` ``--java``|Path to ``java.exe`` (Java11+)<br/><i>default:</i> path to included ``jre``<br/><i>experimental:</i><br/>If not set, will be automatically searched in either the Environment-Variable ``%JAVA_HOME%``(Windows) / ``$JAVA_HOME``(Linux/Mac) or over the command ``where java`` (Windows, Linux, Mac) | ``-j "C:\Program Files\Java\openjdk-11.0.2\bin\java.exe"`` |
+|``-j`` ``--java``|Path to ``java.exe`` (Java21+)<br/><i>default:</i> path to included ``jre``<br/><i>experimental:</i><br/>If not set, will be automatically searched in either the Environment-Variable ``%JAVA_HOME%``(Windows) / ``$JAVA_HOME``(Linux/Mac) or over the command ``where java`` (Windows, Linux, Mac) | ``-j "C:\Program Files\Java\openjdk-21.0.2\bin\java.exe"`` |
 |``-p`` ``--profiles``|Given profiles/variants, that should be used<br/>Overrides the ``Enabled``-property in the json |``-p client server`` ``-p client``|
 
 ##### 2. Run it over JSON-Configuration
@@ -122,7 +119,6 @@ It's also possible to combine it with some parameters from above, e.g. ``-j`` or
   "MappingFilesDir": "mappings",
   "PatchFilesDir": "patch",
   "DeObfuscatedDirectory": "deof",
-  "DecompiledDirectory": "dec",
   "OutputDirectory": "output",
   "OutputDirectoryMetaFiles": "output-meta",
   "OutputDirLibs": "libs",

@@ -40,7 +40,6 @@ namespace Aves.Config
             PatchFile = name + ".txt";
 
             DeObfuscatedFile = name + ".jar";
-            DecompiledFile = DeObfuscatedFile;
          }
       }
 
@@ -83,15 +82,6 @@ namespace Aves.Config
       /// DeObfuscatedFile
       /// </summary>
       public string DeObfuscatedFile { get; set; }
-
-      /// <summary>
-      /// DecompiledFile
-      /// </summary>
-      /// <remarks>
-      /// Fernflower only takes the output directory
-      /// this file get's predicted by <see cref="DeObfuscatedFile"/>
-      /// </remarks>
-      public string DecompiledFile { get; set; }
 
       /// <summary>
       /// OutputFiles Directory Sub Folder
