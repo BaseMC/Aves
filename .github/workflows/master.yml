@@ -54,7 +54,7 @@ jobs:
     needs: [build_release]
     strategy:
       matrix:
-        os: [win-x64, linux-x64, osx-x64]
+        os: [win-x64, linux-x64, osx-x64, linux-arm64]
         configuration: [Release]
         project: [Aves]
     
@@ -70,10 +70,10 @@ jobs:
       - name: Unzip ADB
         run: unzip temp_artf/ADB/ADB.zip -d build
       
-      - name: Setup .NET Core
+      - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 3.1
+          dotnet-version: 8.x
               
       - name: Publish ${{ matrix.os }} ${{ matrix.configuration }} - dotnet publish 
         working-directory: src/${{ matrix.project }}
