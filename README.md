@@ -1,5 +1,7 @@
 [![Latest Version](https://img.shields.io/github/v/release/BaseMC/Aves)](https://github.com/BaseMC/Aves/releases)
 
+_As of 25w45a this is no longer required_
+
 # Aves
 A Minecraft deobfusctor / code generator
 
